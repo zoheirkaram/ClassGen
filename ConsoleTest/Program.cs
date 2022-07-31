@@ -1,13 +1,13 @@
 ﻿using Common.Classes;
-using Converter;
 using Common.Enums;
 using Context;
-using System.Threading.Tasks;
+using Converter;
 using System;
+using System.Threading.Tasks;
 
 namespace ConsoleTest
 {
-	class Program
+    class Program
 	{
 		static async Task Main(string[] args)
 		{
@@ -32,14 +32,14 @@ namespace ConsoleTest
 			var highlightColors = new CSharpHighlightColor() { KeywordColor = "1d44a7" };
 
 			//var convert = new TableConverter(tableName);
-			var convert = new TableConverter(classOptions);
+			var converter = new CSharpConverter(classOptions);
 			//var convert = new TableConverter(classOptions, highlightColors);
 
 			var tableSchemaResult = await context.GetTableData<TableSchemaResult>();
 
-			convert.TableSchama = tableSchemaResult;
+			converter.TableSchama = tableSchemaResult;
 
-			var @class = convert.GetCSharpClass();
+			var @class = converter.GetCSharpClass();
 			//var classHtmlDocument = convert.GetHighlightedCSharpClass();
 
 			Console.WriteLine(@class);

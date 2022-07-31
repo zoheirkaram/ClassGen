@@ -56,12 +56,12 @@ namespace TableToCSharp
 
 			context.SetTableName(this.cboTables.Text);
 
-			var convert = new TableConverter(classOptions);
+			var converter = new CSharpConverter(classOptions);
 			var tableSchemaResult = await context.GetTableData<TableSchemaResult>();
 
-			convert.TableSchama = tableSchemaResult;
+			converter.TableSchama = tableSchemaResult;
 
-			var @class = convert.GetHighlightedCSharpClass();
+			var @class = converter.GetHighlightedCSharpClass();
 
 			this.htmlDisplay.NavigateToString(@class);
 			this.btnGenerateClass.IsEnabled = true;

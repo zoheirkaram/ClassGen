@@ -69,7 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\TableConverter.cs" />
+    <Compile Include="Implementations\CSharpConverter.cs" />
+    <Compile Include="Interfaces\IConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

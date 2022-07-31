@@ -9,7 +9,7 @@ using Skybrud.SyntaxHighlighter;
 
 namespace Converter
 {
-	public class TableConverter
+	public class CSharpConverter : IConverter
     {
 		public List<TableSchemaResult> TableSchama { set; get; }
 
@@ -17,19 +17,19 @@ namespace Converter
 		private CSharpHighlightColor _highlightColors;
 		private string _style = string.Empty;
 
-		public TableConverter(string tableName)
+		public CSharpConverter(string tableName)
 		{
 			this._classOptions = new ConvertOptions() { TableName = tableName };
 			this.setStyle();
 		}
 
-		public TableConverter(ConvertOptions classOptions)
+		public CSharpConverter(ConvertOptions classOptions)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
 			this.setStyle();
 		}
 
-		public TableConverter(ConvertOptions classOptions, CSharpHighlightColor cSharpHighlightColor)
+		public CSharpConverter(ConvertOptions classOptions, CSharpHighlightColor cSharpHighlightColor)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
 			this._highlightColors = cSharpHighlightColor ?? new CSharpHighlightColor();
