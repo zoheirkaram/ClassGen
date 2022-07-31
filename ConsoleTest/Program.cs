@@ -20,7 +20,7 @@ namespace ConsoleTest
 			var classOptions = new ConvertOptions
 			{
 				TableName = tableName,
-				Modifier = Modifier.mod_public,
+				Modifier = Modifier.Public,
 				ClassType = ClassType.Entity,
 				ShowForeignKey = true,
 				ShowForeignProperty = true,

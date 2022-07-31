@@ -44,15 +44,19 @@ namespace Converter
 			if (this._classOptions.ClassType == ClassType.Entity && this._classOptions.ShowTableName)
 			{
 				stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations;");
+
 				if (this.TableSchama.Any(td => td.HasReference))
 				{
 					stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
 				}
+
+				stringBuilder.AppendLine("");
+				stringBuilder.AppendLine("-----");
 				stringBuilder.AppendLine("");
 				stringBuilder.AppendLine($"[Table(\"{this._classOptions.TableName}\")]");
 			}
 
-			stringBuilder.AppendLine($"{this._classOptions.Modifier.ToString().Replace("mod_", "")} class {new Pluralizer().Singularize(this._classOptions.TableName)}");
+			stringBuilder.AppendLine($"{this._classOptions.Modifier.ToString().ToLower()} class {new Pluralizer().Singularize(this._classOptions.TableName)}");
 			stringBuilder.AppendLine("{");
 
 			this.TableSchama.ToList()
@@ -100,7 +104,7 @@ namespace Converter
 		{
 			string html = Highlighter.HighlightCSharp(this.GetCSharpClass());
 
-			html = html.Insert(0, $"<style>{_style}</style><body>");
+			html = html.Insert(0, $"<style>{_style}</style><body>").Replace("-----", "<hr />");
 			html = html.Insert(html.Length, "</body>");
 
 			return html;

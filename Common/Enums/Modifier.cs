@@ -1,10 +1,12 @@
-﻿namespace Common.Enums
+﻿using System.ComponentModel;
+
+namespace Common.Enums
 {
 	public enum Modifier
 	{
-		mod_public = 1,
-		mod_private = 2,
-		mod_protected = 3,
-		mod_internal = 4
+		Public = 1,
+		Private = 2,
+		Protected = 3,
+		Internal = 4
 	}
 }
