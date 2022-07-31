@@ -10,7 +10,7 @@ namespace Converter
     public interface IConverter
     {
         List<TableSchemaResult> TableSchama { get; set; }
-        string GetCSharpClass();
-        string GetHighlightedCSharpClass();
+        string GetClass();
+        string GetHighlightedClass();
     }
 }

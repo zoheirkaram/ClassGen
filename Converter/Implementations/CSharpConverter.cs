@@ -36,7 +36,7 @@ namespace Converter
 			this.setStyle();
 		}
 
-		public string GetCSharpClass()
+		public string GetClass()
 		{
 			var nullableSqlTypes = new List<string> { "bigint, bit, date, datetime, datetime2, datetimeoffset, decimal, float, int, money, numeric, real, smalldatetime, smallint, smallmoney, time, tinyint, uniqueidentifier" };
 			var stringBuilder = new StringBuilder();
@@ -103,9 +103,9 @@ namespace Converter
 			return stringBuilder.ToString();
 		}
 
-		public string GetHighlightedCSharpClass()
+		public string GetHighlightedClass()
 		{
-			string html = Highlighter.HighlightCSharp(this.GetCSharpClass());
+			string html = Highlighter.HighlightCSharp(this.GetClass());
 
 			html = html.Insert(0, $"<style>{_style}</style><body>").Replace("-----", "<hr />");
 			html = html.Insert(html.Length, "</body>");

@@ -61,7 +61,7 @@ namespace TableToCSharp
 
 			converter.TableSchama = tableSchemaResult;
 
-			var @class = converter.GetHighlightedCSharpClass();
+			var @class = converter.GetHighlightedClass();
 
 			this.htmlDisplay.NavigateToString(@class);
 			this.btnGenerateClass.IsEnabled = true;

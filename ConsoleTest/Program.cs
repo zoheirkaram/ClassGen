@@ -39,7 +39,7 @@ namespace ConsoleTest
 
 			converter.TableSchama = tableSchemaResult;
 
-			var @class = converter.GetCSharpClass();
+			var @class = converter.GetClass();
 			//var classHtmlDocument = convert.GetHighlightedCSharpClass();
 
 			Console.WriteLine(@class);
