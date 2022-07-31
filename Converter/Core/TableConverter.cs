@@ -41,7 +41,7 @@ namespace Converter
 			var nullableSqlTypes = new List<string> { "bigint, bit, date, datetime, datetime2, datetimeoffset, decimal, float, int, money, numeric, real, smalldatetime, smallint, smallmoney, time, tinyint, uniqueidentifier" };
 			var stringBuilder = new StringBuilder();
 
-			if (this._classOptions.ClassType == ClassType.Entity && this._classOptions.ShowTableName)
+			if (this._classOptions.ClassType == ClassType.Entity)	
 			{
 				stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations;");
 
@@ -53,7 +53,10 @@ namespace Converter
 				stringBuilder.AppendLine("");
 				stringBuilder.AppendLine("-----");
 				stringBuilder.AppendLine("");
-				stringBuilder.AppendLine($"[Table(\"{this._classOptions.TableName}\")]");
+				if (this._classOptions.ShowTableName)
+                {
+					stringBuilder.AppendLine($"[Table(\"{this._classOptions.TableName}\")]");
+                }
 			}
 
 			stringBuilder.AppendLine($"{this._classOptions.Modifier.ToString().ToLower()} class {new Pluralizer().Singularize(this._classOptions.TableName)}");
