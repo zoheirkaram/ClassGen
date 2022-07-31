@@ -9,57 +9,70 @@
 		Width="1001"
 		Background="#FF575757" Loaded="OnLoad"
 		ResizeMode="NoResize">
-	<Grid Margin="5">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="30"></RowDefinition>
-			<RowDefinition Height="30"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="230"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
-		<Grid Grid.Row="2" Margin="0,0,0,10">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Margin="10,0,0,0" Foreground="Gainsboro"/>
-			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="124" Margin="10,0,0,0" Foreground="Gainsboro"/>
-			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="210"/>
-			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="210"/>
-			<CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
-			<CheckBox x:Name="chkShowForeignKey" Content="Show Foreign Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
-			<CheckBox x:Name="chkShowForeignProperty" Content="Show Foreign Property" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
-			<CheckBox x:Name="chkShowMaxLength" Content="Show Max Length" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="8" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
-			<CheckBox x:Name="chkEnumerateSimilarFKProperties" Content="Enumerate Similar FK Properties" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="9" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="False"/>
-			<CheckBox x:Name="chkShowTableName" Content="Show Table Name" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
-			<Button Grid.Row="11" Click="Button_GenerateClass_Click" Height="30" VerticalAlignment="Center" x:Name="btnGenerateClass">Generate Class</Button>
-		</Grid>
-		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
-		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
-		<TextBox x:Name="txtConnection" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="649" Height="20"/>
-		<Button x:Name="btnConnect" Content="Connect" Grid.Column="1" HorizontalAlignment="Left" Margin="664,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click"/>
-		<ComboBox x:Name="cboTables" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
-		<Grid Grid.Column="1" Grid.Row="2">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="491.04"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="761"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<WebBrowser x:Name="htmlDisplay" HorizontalAlignment="Center" Height="471" VerticalAlignment="Center" Width="741" Grid.Row="1" Grid.Column="1"/>
-		</Grid>
-	</Grid>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Margin="10,0,0,0" Foreground="Gainsboro"/>
+            <Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="124" Margin="10,0,0,0" Foreground="Gainsboro"/>
+            <ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="210"/>
+            <ComboBox x:Name="cboModifiers" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="210"/>
+            <CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
+            <CheckBox x:Name="chkShowForeignKey" Content="Show Foreign Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
+            <CheckBox x:Name="chkShowForeignProperty" Content="Show Foreign Property" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
+            <CheckBox x:Name="chkShowMaxLength" Content="Show Max Length" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="8" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
+            <CheckBox x:Name="chkEnumerateSimilarFKProperties" Content="Enumerate Similar FK Properties" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="9" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="False"/>
+            <CheckBox x:Name="chkShowTableName" Content="Show Table Name" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
+            <Button Grid.Row="11" Click="Button_GenerateClass_Click" Height="30" VerticalAlignment="Center" x:Name="btnGenerateClass">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                Generate Class
+            </Button>
+        </Grid>
+        <Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
+        <Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
+        <TextBox x:Name="txtConnection" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="649" Height="20"/>
+        <Button x:Name="btnConnect" Content="Connect" Grid.Column="1" HorizontalAlignment="Left" Margin="664,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <ComboBox x:Name="cboTables" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="491.04"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="761"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <WebBrowser x:Name="htmlDisplay" HorizontalAlignment="Center" Height="471" VerticalAlignment="Center" Width="741" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+    </Grid>
 
 </Window>
