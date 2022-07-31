@@ -11,7 +11,7 @@ namespace ConsoleTest
 	{
 		static async Task Main(string[] args)
 		{
-			var connectinoString = @"Data Source=.;Integrated Security=SSPI;Initial Catalog=AdventureWorks2017";
+			var connectinoString = @"Data Source=(local);Integrated Security=SSPI;Initial Catalog=DatabaseName";
 			var tableName = "WorkOrder";
 			var context = new SqlContext(connectinoString);
 

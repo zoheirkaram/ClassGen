@@ -48,7 +48,7 @@
 		</Grid>
 		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
 		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
-		<TextBox x:Name="txtConnection" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DataBaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="649" Height="20"/>
+		<TextBox x:Name="txtConnection" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="649" Height="20"/>
 		<Button x:Name="btnConnect" Content="Connect" Grid.Column="1" HorizontalAlignment="Left" Margin="664,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click"/>
 		<ComboBox x:Name="cboTables" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
 		<Grid Grid.Column="1" Grid.Row="2">
