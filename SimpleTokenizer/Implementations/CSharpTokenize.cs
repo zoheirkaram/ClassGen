@@ -164,6 +164,23 @@ namespace SimpleTokenizer
                 ++i;
             }
 
+            tokens
+            .ForEach(t =>
+            {
+                if (t.Type == TokenType.keyword)
+                {
+                    t.HtmlSymbol = $"<span class=\"{t.Type}\">{t.Symbol}</span>";
+                }
+                if (t.Type == TokenType.identifier)
+                {
+                    t.HtmlSymbol = $"<span class=\"{t.Type}\">{t.Symbol}</span>";
+                }
+                if (t.Type == TokenType.separator || t.Type == TokenType.quotation || t.Type == TokenType.bracket)
+                {
+                    t.HtmlSymbol = $"{t.Symbol}";
+                }
+            });
+
             return tokens;
         }
     }

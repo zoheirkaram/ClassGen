@@ -9,5 +9,6 @@ namespace Common.Classes
         public int PositionStart { get; set; }
         public int SymbolLength { get; set; }
         public string Symbol { get; set; }
+        public string HtmlSymbol { get; set; }
     }
 }
