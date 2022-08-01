@@ -148,7 +148,7 @@ namespace SimpleTokenizer
             var i = 0;
             var symbolStart = 0;
             var symbol = string.Empty;
-            var letteral = string.Empty;
+            var quotedString = string.Empty;
 
             while (i < line.Length)
             {
@@ -184,18 +184,18 @@ namespace SimpleTokenizer
 
                 if (Quotations.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
-                    letteral = CurrentChar(line, i);
+                    quotedString = CurrentChar(line, i);
 
                     while (NextChar(line, i) != "\"")
                     {
-                        letteral += NextChar(line, i);
+                        quotedString += NextChar(line, i);
 
                         ++i;
                     }
 
-                    letteral += CurrentChar(line, ++i);
+                    quotedString += CurrentChar(line, ++i);
 
-                    tokens.Add(new Token { Type = TokenType.quotedString, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = letteral });
+                    tokens.Add(new Token { Type = TokenType.quotedString, LineNumber = lineNumber, PositionStart = i, SymbolLength = quotedString.Length, Symbol = quotedString });
 
                     ++i;
                     continue;
@@ -210,7 +210,7 @@ namespace SimpleTokenizer
                         ||
                         Brackets.Any(b => b.Item1 == NextChar(line, i))
                         ||
-                        NextChar(line, i) == " "
+                        string.IsNullOrWhiteSpace(NextChar(line, i))
                     )
 
                 {
