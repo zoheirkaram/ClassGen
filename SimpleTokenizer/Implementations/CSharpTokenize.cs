@@ -102,6 +102,7 @@ namespace SimpleTokenizer
         {
             var tokens = new List<Token>();
             var i = 0;
+            var symbolStart = 0;
             var symbol = string.Empty;
 
             while (i < line.Length)
@@ -148,12 +149,14 @@ namespace SimpleTokenizer
                 {
                     if (keywords.Count(k => k.Item1 == symbol) > 0)
                     {
-                        tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = symbol.Length, Symbol = symbol });
+                        tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
+                        symbolStart = i;
                         symbol = string.Empty;
                     }
                     else
                     {
-                        tokens.Add(new Token { Type = TokenType.identifier, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = symbol.Length, Symbol = symbol });
+                        tokens.Add(new Token { Type = TokenType.identifier, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
+                        symbolStart = i;
                         symbol = string.Empty;
                     }
                 }
