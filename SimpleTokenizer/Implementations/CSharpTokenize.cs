@@ -113,21 +113,21 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (brackets.Count(b => b.Item1 == CurrentChar(line, i)) > 0)
+                if (brackets.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
                     ++i;
                     continue;
                 }
 
-                if (separators.Count(b => b.Item1 == CurrentChar(line, i)) > 0)
+                if (separators.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
                     ++i;
                     continue;
                 }
 
-                if (qoutations.Count(b => b.Item1 == CurrentChar(line, i)) > 0)
+                if (qoutations.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.quotation, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
                     ++i;
@@ -137,17 +137,17 @@ namespace SimpleTokenizer
                 symbol += CurrentChar(line, i);
 
                 if (
-                        qoutations.Count(b => b.Item1 == NextChar(line, i)) > 0
+                        qoutations.Any(b => b.Item1 == NextChar(line, i))
                         ||
-                        separators.Count(b => b.Item1 == NextChar(line, i)) > 0
+                        separators.Any(b => b.Item1 == NextChar(line, i))
                         ||
-                        brackets.Count(b => b.Item1 == NextChar(line, i)) > 0
+                        brackets.Any(b => b.Item1 == NextChar(line, i))
                         ||
                         NextChar(line, i) == " "
                     )
 
                 {
-                    if (keywords.Count(k => k.Item1 == symbol) > 0)
+                    if (keywords.Any(k => k.Item1 == symbol))
                     {
                         tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
                         symbolStart = i;
