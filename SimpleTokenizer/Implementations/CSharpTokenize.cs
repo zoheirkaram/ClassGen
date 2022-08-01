@@ -10,7 +10,8 @@ namespace SimpleTokenizer
 {
     public class CSharpTokenize : ITokenizer
     {
-        public List<(string, TokenType)> Keywords {
+        public List<(string, TokenType)> Keywords
+        {
             get
             {
                 return new List<(string, TokenType)>
@@ -158,7 +159,7 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (Brackets.Any(b => b.Item1 == this.CurrentChar(line, i)))
+                if (this.Brackets.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
                     tokens.Add(item: new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
@@ -166,7 +167,7 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (Separators.Any(b => b.Item1 == this.CurrentChar(line, i)))
+                if (this.Separators.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
@@ -174,7 +175,7 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (Nullable.Any(b => b.Item1 == this.CurrentChar(line, i)))
+                if (this.Nullable.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
@@ -182,7 +183,7 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (Quotations.Any(b => b.Item1 == this.CurrentChar(line, i)))
+                if (this.Quotations.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
                     quotedString = this.CurrentChar(line, i);
 
@@ -204,19 +205,19 @@ namespace SimpleTokenizer
                 symbol += this.CurrentChar(line, i);
 
                 if (
-                        Quotations.Any(b => b.Item1 == this.NextChar(line, i))
+                        this.Quotations.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        Separators.Any(b => b.Item1 == this.NextChar(line, i))
+                        this.Separators.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        Brackets.Any(b => b.Item1 == this.NextChar(line, i))
+                        this.Brackets.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        Nullable.Any(b => b.Item1 == this.NextChar(line, i))
+                        this.Nullable.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
                         string.IsNullOrWhiteSpace(this.NextChar(line, i))
                     )
 
                 {
-                    if (Keywords.Any(k => k.Item1 == symbol))
+                    if (this.Keywords.Any(k => k.Item1 == symbol))
                     {
                         tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
 
