@@ -10,8 +10,8 @@ namespace SimpleTokenizer
 {
     public class CSharpTokenize : ITokenizer
     {
-        public List<(string, TokenType)> keywords { 
-            get 
+        public List<(string, TokenType)> Keywords {
+            get
             {
                 return new List<(string, TokenType)>
                 {
@@ -46,7 +46,7 @@ namespace SimpleTokenizer
             }
             set { }
         }
-        public List<(string, TokenType)> brackets
+        public List<(string, TokenType)> Brackets
         {
             get
             {
@@ -62,7 +62,7 @@ namespace SimpleTokenizer
             }
             set { }
         }
-        public List<(string, TokenType)> separators 
+        public List<(string, TokenType)> Separators
         {
             get
             {
@@ -75,7 +75,7 @@ namespace SimpleTokenizer
             }
             set { }
         }
-        public List<(string, TokenType)> qoutations 
+        public List<(string, TokenType)> Qoutations
         {
             get
             {
@@ -93,17 +93,37 @@ namespace SimpleTokenizer
             return line[location].ToString();
         }
 
-        public string NextChar(string line, int location)
+		public string NextChar(string line, int location)
         {
             return location + 1 < line.Length ? line[location + 1].ToString() : "";
+        }
+
+        public List<Token> GetTokens(string code)
+        {
+            var codeTokens = new List<Token>();
+            var codeLines = code.Split('\n');
+
+            var lineNumber = 1;
+
+            while (lineNumber <= codeLines.Length)
+            {
+                codeTokens.AddRange(TokenizLine(codeLines[lineNumber - 1].Trim(), lineNumber));
+                ++lineNumber;
+            }
+
+            PrepareHtmlTokens(codeTokens);
+
+            return codeTokens;
         }
 
         public List<Token> TokenizLine(string line, int lineNumber)
         {
             var tokens = new List<Token>();
+
             var i = 0;
             var symbolStart = 0;
             var symbol = string.Empty;
+            var letteral = string.Empty;
 
             while (i < line.Length)
             {
@@ -113,23 +133,37 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (brackets.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Brackets.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+
                     ++i;
                     continue;
                 }
 
-                if (separators.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Separators.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+
                     ++i;
                     continue;
                 }
 
-                if (qoutations.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Qoutations.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.quotation, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+                    letteral = CurrentChar(line, i);
+
+                    while (NextChar(line, i) != "\"")
+                    {
+                        letteral += NextChar(line, i);
+
+                        ++i;
+                    }
+
+                    letteral += CurrentChar(line, ++i);
+
+                    tokens.Add(new Token { Type = TokenType.quotedString, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = letteral });
+
                     ++i;
                     continue;
                 }
@@ -137,25 +171,27 @@ namespace SimpleTokenizer
                 symbol += CurrentChar(line, i);
 
                 if (
-                        qoutations.Any(b => b.Item1 == NextChar(line, i))
+                        Qoutations.Any(b => b.Item1 == NextChar(line, i))
                         ||
-                        separators.Any(b => b.Item1 == NextChar(line, i))
+                        Separators.Any(b => b.Item1 == NextChar(line, i))
                         ||
-                        brackets.Any(b => b.Item1 == NextChar(line, i))
+                        Brackets.Any(b => b.Item1 == NextChar(line, i))
                         ||
                         NextChar(line, i) == " "
                     )
 
                 {
-                    if (keywords.Any(k => k.Item1 == symbol))
+                    if (Keywords.Any(k => k.Item1 == symbol))
                     {
                         tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
+
                         symbolStart = i;
                         symbol = string.Empty;
                     }
                     else
                     {
                         tokens.Add(new Token { Type = TokenType.identifier, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
+
                         symbolStart = i;
                         symbol = string.Empty;
                     }
@@ -164,14 +200,15 @@ namespace SimpleTokenizer
                 ++i;
             }
 
+            return tokens;
+        }
+
+		public void PrepareHtmlTokens(List<Token> tokens)
+		{
             tokens
             .ForEach(t =>
             {
-                if (t.Type == TokenType.keyword)
-                {
-                    t.HtmlSymbol = $"<span class=\"{t.Type}\">{t.Symbol}</span>";
-                }
-                if (t.Type == TokenType.identifier)
+                if (t.Type == TokenType.keyword || t.Type == TokenType.identifier || t.Type == TokenType.quotedString)
                 {
                     t.HtmlSymbol = $"<span class=\"{t.Type}\">{t.Symbol}</span>";
                 }
@@ -180,8 +217,6 @@ namespace SimpleTokenizer
                     t.HtmlSymbol = $"{t.Symbol}";
                 }
             });
-
-            return tokens;
         }
-    }
+	}
 }

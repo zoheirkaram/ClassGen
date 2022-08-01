@@ -11,8 +11,9 @@ namespace Common.Enums
 		keyword,
 		identifier,
 		bracket,
-		number,
 		quotation,
-		separator
+		separator,
+		space,
+		quotedString
 	}
 }

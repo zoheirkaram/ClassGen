@@ -45,7 +45,7 @@
     <Compile Include="Classes\CSharpHighlightColor.cs" />
     <Compile Include="Classes\TableSchemaResult.cs" />
     <Compile Include="Classes\Token.cs" />
-    <Compile Include="Enums\Class1.cs" />
+    <Compile Include="Enums\TokenType.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\Modifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

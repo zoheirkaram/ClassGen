@@ -6,13 +6,15 @@ namespace SimpleTokenizer
 {
     public  interface ITokenizer
     {
+        List<Token> GetTokens(string code);
         List<Token> TokenizLine(string line, int lineNumber);
         string CurrentChar(string line, int location);
         string NextChar(string line, int location);
+        void PrepareHtmlTokens(List<Token> tokens);
 
-        List<(string, TokenType)> keywords { get; set; }
-        List<(string, TokenType)> brackets { get; set; }
-        List<(string, TokenType)> separators { get; set; }
-        List<(string, TokenType)> qoutations { get; set; }
+        List<(string, TokenType)> Keywords { get; set; }
+        List<(string, TokenType)> Brackets { get; set; }
+        List<(string, TokenType)> Separators { get; set; }
+        List<(string, TokenType)> Qoutations { get; set; }
     }
 }
