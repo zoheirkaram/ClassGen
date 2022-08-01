@@ -11,7 +11,7 @@ namespace ConsoleTest
 	{
 		static async Task Main(string[] args)
 		{
-			var connectinoString = @"Data Source=(local);Integrated Security=SSPI;Initial Catalog=DatabaseName";
+			var connectinoString = @"Data Source=.;Integrated Security=SSPI;Initial Catalog=AdventureWorks2017";
 			var tableName = "WorkOrder";
 			var context = new SqlContext(connectinoString);
 
@@ -41,6 +41,14 @@ namespace ConsoleTest
 
 			var @class = converter.GetClass();
 			//var classHtmlDocument = convert.GetHighlightedCSharpClass();
+
+			Console.WriteLine($"Token\t\tLineNumber\t[Start, Length]\t\tSymbol");
+
+			var tokens = new SimpleTokenizer.CSharpTokenize().GetTokens(@class);
+			tokens.ForEach(token =>
+			{
+				Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");
+			});
 
 			Console.WriteLine(@class);
 			//Console.WriteLine(classHtmlDocument);

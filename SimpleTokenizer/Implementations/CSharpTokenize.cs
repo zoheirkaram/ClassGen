@@ -160,7 +160,7 @@ namespace SimpleTokenizer
 
                 if (Brackets.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = CurrentChar(line, i) });
 
                     ++i;
                     continue;
@@ -168,7 +168,7 @@ namespace SimpleTokenizer
 
                 if (Separators.Any(b => b.Item1 == CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i - 1, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = CurrentChar(line, i) });
 
                     ++i;
                     continue;
@@ -210,22 +210,24 @@ namespace SimpleTokenizer
                         ||
                         Brackets.Any(b => b.Item1 == NextChar(line, i))
                         ||
+                        Nullable.Any(b => b.Item1 == NextChar(line, i))
+                        ||
                         string.IsNullOrWhiteSpace(NextChar(line, i))
                     )
 
                 {
                     if (Keywords.Any(k => k.Item1 == symbol))
                     {
-                        tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
+                        tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
 
-                        symbolStart = i;
+                        symbolStart = i + 1;
                         symbol = string.Empty;
                     }
                     else
                     {
-                        tokens.Add(new Token { Type = TokenType.identifier, LineNumber = lineNumber, PositionStart = symbolStart - 1, SymbolLength = symbol.Length - 1, Symbol = symbol });
+                        tokens.Add(new Token { Type = TokenType.identifier, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
 
-                        symbolStart = i;
+                        symbolStart = i + 1;
                         symbol = string.Empty;
                     }
                 }
