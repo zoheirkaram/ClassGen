@@ -129,71 +129,71 @@ namespace SimpleTokenizer
 
             while (lineNumber <= codeLines.Length)
             {
-                var lineTokens = TokenizLine(codeLines[lineNumber - 1].Trim(), lineNumber);
+                var lineTokens = this.TokenizLine(codeLines[lineNumber - 1].Trim(), lineNumber);
 
                 codeTokens.AddRange(lineTokens);
 
                 ++lineNumber;
             }
 
-            PrepareHtmlTokens(codeTokens);
+            this.PrepareHtmlTokens(codeTokens);
 
             return codeTokens;
         }
 
         public List<Token> TokenizLine(string line, int lineNumber)
-        {
+		{
             var tokens = new List<Token>();
 
             var i = 0;
-            var symbolStart = 0;
+			var symbolStart = 0;
             var symbol = string.Empty;
             var quotedString = string.Empty;
 
             while (i < line.Length)
             {
-                if (string.IsNullOrWhiteSpace(CurrentChar(line, i)))
+                if (string.IsNullOrWhiteSpace(this.CurrentChar(line, i)))
                 {
                     ++i;
                     continue;
                 }
 
-                if (Brackets.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Brackets.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+                    tokens.Add(item: new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
                     ++i;
                     continue;
                 }
 
-                if (Separators.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Separators.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
                     ++i;
                     continue;
                 }
 
-                if (Nullable.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Nullable.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
                     ++i;
                     continue;
                 }
 
-                if (Quotations.Any(b => b.Item1 == CurrentChar(line, i)))
+                if (Quotations.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    quotedString = CurrentChar(line, i);
+                    quotedString = this.CurrentChar(line, i);
 
-                    while (NextChar(line, i) != "\"")
+                    while (this.NextChar(line, i) != "\"")
                     {
-                        quotedString += NextChar(line, i);
+                        quotedString += this.NextChar(line, i);
 
                         ++i;
                     }
 
-                    quotedString += CurrentChar(line, ++i);
+                    quotedString += this.CurrentChar(line, ++i);
 
                     tokens.Add(new Token { Type = TokenType.quotedString, LineNumber = lineNumber, PositionStart = i, SymbolLength = quotedString.Length, Symbol = quotedString });
 
@@ -201,18 +201,18 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                symbol += CurrentChar(line, i);
+                symbol += this.CurrentChar(line, i);
 
                 if (
-                        Quotations.Any(b => b.Item1 == NextChar(line, i))
+                        Quotations.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        Separators.Any(b => b.Item1 == NextChar(line, i))
+                        Separators.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        Brackets.Any(b => b.Item1 == NextChar(line, i))
+                        Brackets.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        Nullable.Any(b => b.Item1 == NextChar(line, i))
+                        Nullable.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        string.IsNullOrWhiteSpace(NextChar(line, i))
+                        string.IsNullOrWhiteSpace(this.NextChar(line, i))
                     )
 
                 {
