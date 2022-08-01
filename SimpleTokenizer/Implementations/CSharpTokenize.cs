@@ -107,7 +107,10 @@ namespace SimpleTokenizer
 
             while (lineNumber <= codeLines.Length)
             {
-                codeTokens.AddRange(TokenizLine(codeLines[lineNumber - 1].Trim(), lineNumber));
+                var lineTokens = TokenizLine(codeLines[lineNumber - 1].Trim(), lineNumber);
+
+                codeTokens.AddRange(lineTokens);
+
                 ++lineNumber;
             }
 
