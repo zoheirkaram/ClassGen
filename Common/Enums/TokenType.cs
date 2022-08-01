@@ -14,6 +14,7 @@ namespace Common.Enums
 		quotation,
 		separator,
 		space,
-		quotedString
+		quotedString,
+		nullable
 	}
 }

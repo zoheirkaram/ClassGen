@@ -15,6 +15,8 @@ namespace SimpleTokenizer
         List<(string, TokenType)> Keywords { get; set; }
         List<(string, TokenType)> Brackets { get; set; }
         List<(string, TokenType)> Separators { get; set; }
-        List<(string, TokenType)> Qoutations { get; set; }
+        List<(string, TokenType)> Quotations { get; set; }
+        List<(string, TokenType)> Nullable { get; set; }
+
     }
 }
