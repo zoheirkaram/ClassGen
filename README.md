@@ -1,7 +1,7 @@
 
 Simple application to convert a selected table to C# class for now
 
-- Contains Console and WPF implementations.
+- Contains Console and WPF implementations _Still a WPF newbie_.
 - Contains simple tokenizer to be used for class highlighting.
 
 #### Dependencies
