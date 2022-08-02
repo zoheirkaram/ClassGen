@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Table To Class"
+        Title="ClassGen"
 		Height="622"
 		Width="1037"
 		Background="#FF575757" Loaded="OnLoad"
@@ -16,10 +16,11 @@
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="230"></ColumnDefinition>
+			<ColumnDefinition Width="31.298"></ColumnDefinition>
+			<ColumnDefinition Width="198.702"/>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<Grid Grid.Row="2" Margin="0,0,0,10">
+		<Grid Grid.Row="2" Margin="0,0,0,10" Grid.ColumnSpan="2">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="30"></RowDefinition>
 				<RowDefinition Height="30"></RowDefinition>
@@ -53,18 +54,18 @@
 				Generate Class
 			</Button>
 		</Grid>
-		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
-		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0"/>
-		<TextBox x:Name="txtConnection" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="620" Height="20"/>
-		<Button x:Name="btnConnect" Content="Connect" Grid.Column="1" HorizontalAlignment="Left" Margin="635,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20">
+		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+		<TextBox x:Name="txtConnection" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="620" Height="20"/>
+		<Button x:Name="btnConnect" Content="Connect" Grid.Column="2" HorizontalAlignment="Left" Margin="635,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20">
 			<Button.Resources>
 				<Style TargetType="Border">
 					<Setter Property="CornerRadius" Value="5"/>
 				</Style>
 			</Button.Resources>
 		</Button>
-		<ComboBox x:Name="cboTables" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
-		<Grid Grid.Column="1" Grid.Row="2">
+		<ComboBox x:Name="cboTables" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
+		<Grid Grid.Column="2" Grid.Row="2">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="491.04"></RowDefinition>
 			</Grid.RowDefinitions>

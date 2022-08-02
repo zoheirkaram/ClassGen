@@ -72,9 +72,9 @@
       <Project>{b4d5f2eb-c834-43c3-84c9-15504012a0f1}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Context\Context.csproj">
+    <ProjectReference Include="..\Context\DBContext.csproj">
       <Project>{ebb1c2f9-f393-4e75-9bda-7bc22c9e3355}</Project>
-      <Name>Context</Name>
+      <Name>DBContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\SimpleTokenizer\SimpleTokenizer.csproj">
       <Project>{3bd276e1-f972-4d6e-8e19-6f2bf6f0c75d}</Project>

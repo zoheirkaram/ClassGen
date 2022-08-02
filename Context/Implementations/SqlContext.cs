@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Context
+namespace DBContext
 {
     public class SqlContext : IContext
     {
