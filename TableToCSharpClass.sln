@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter", "Converter\Conv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{8DA6560F-6D8C-4531-A364-7412BD1D1B68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TableToCSharp", "TableToCSharp\TableToCSharp.csproj", "{CD87C181-9145-446B-A191-4E004C95FFA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TableToClass", "TableToClass\TableToClass.csproj", "{CD87C181-9145-446B-A191-4E004C95FFA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTokenizer", "SimpleTokenizer\SimpleTokenizer.csproj", "{3BD276E1-F972-4D6E-8E19-6F2BF6F0C75D}"
 EndProject
