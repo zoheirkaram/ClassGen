@@ -1,11 +1,16 @@
 
-Simple application to convert a selected table to C# class (Entity or Contract)
+Simple application to convert a selected table to C# class for now
 
 - Contains Console and WPF implementations.
 - Contains simple tokenizer to be used for class highlighting.
 
 #### Dependencies
 - @rvegajr - https://github.com/rvegajr/Pluralize.NET.Core For pluralization/singularazation used when generating C# class.
+
+#### Plans
+- Adding connection manager
+- Highlight theme manager
+- Adding multiple language support
 
 ### Screenshot
 
