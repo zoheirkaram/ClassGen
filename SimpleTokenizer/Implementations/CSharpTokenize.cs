@@ -1,14 +1,11 @@
 ﻿using Common.Classes;
 using Common.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleTokenizer
 {
-    public class CSharpTokenize : ITokenizer
+	public class CSharpTokenize : ITokenizer
     {
         public List<(string, TokenType)> Keywords
         {
