@@ -2,6 +2,8 @@
 using Common.Enums;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Text;
 
 namespace SimpleTokenizer
 {
@@ -13,39 +15,39 @@ namespace SimpleTokenizer
             {
                 return new List<(string, TokenType)>
                 {
-                    ("public", TokenType.keyword),
-                    ("private", TokenType.keyword),
-                    ("internal", TokenType.keyword),
-                    ("protected", TokenType.keyword),
-                    ("abstract", TokenType.keyword),
-                    ("virtual", TokenType.keyword),
+                    ("public", TokenType.Keyword),
+                    ("private", TokenType.Keyword),
+                    ("internal", TokenType.Keyword),
+                    ("protected", TokenType.Keyword),
+                    ("abstract", TokenType.Keyword),
+                    ("virtual", TokenType.Keyword),
 
-                    ("using", TokenType.keyword),
-                    ("namespace", TokenType.keyword),
-                    ("class", TokenType.keyword),
-                    ("get", TokenType.keyword),
-                    ("set", TokenType.keyword),
-                    ("const", TokenType.keyword),
-                    ("null", TokenType.keyword),
+                    ("using", TokenType.Keyword),
+                    ("namespace", TokenType.Keyword),
+                    ("class", TokenType.Keyword),
+                    ("get", TokenType.Keyword),
+                    ("set", TokenType.Keyword),
+                    ("const", TokenType.Keyword),
+                    ("null", TokenType.Keyword),
 
-                    ("bool", TokenType.keyword),
-                    ("byte", TokenType.keyword),
-                    ("char", TokenType.keyword),
-                    ("decimal", TokenType.keyword),
-                    ("double", TokenType.keyword),
-                    ("extern", TokenType.keyword),
-                    ("float", TokenType.keyword),
-                    ("int", TokenType.keyword),
-                    ("long", TokenType.keyword),
-                    ("object", TokenType.keyword),
-                    ("readonly", TokenType.keyword),
-                    ("sbyte", TokenType.keyword),
-                    ("short", TokenType.keyword),
-                    ("string", TokenType.keyword),
-                    ("TimeSpan", TokenType.keyword),
-                    ("DateTime", TokenType.keyword),
-                    ("DateTimeOffset", TokenType.keyword),
-                    ("Guid", TokenType.keyword),
+                    ("bool", TokenType.Keyword),
+                    ("byte", TokenType.Keyword),
+                    ("char", TokenType.Keyword),
+                    ("decimal", TokenType.Keyword),
+                    ("double", TokenType.Keyword),
+                    ("extern", TokenType.Keyword),
+                    ("float", TokenType.Keyword),
+                    ("int", TokenType.Keyword),
+                    ("long", TokenType.Keyword),
+                    ("object", TokenType.Keyword),
+                    ("readonly", TokenType.Keyword),
+                    ("sbyte", TokenType.Keyword),
+                    ("short", TokenType.Keyword),
+                    ("string", TokenType.Keyword),
+                    ("TimeSpan", TokenType.Keyword),
+                    ("DateTime", TokenType.Keyword),
+                    ("DateTimeOffset", TokenType.Keyword),
+                    ("Guid", TokenType.Keyword),
 
                 };
             }
@@ -57,14 +59,14 @@ namespace SimpleTokenizer
             {
                 return new List<(string, TokenType)>
                 {
-                    ("(", TokenType.bracket),
-                    (")", TokenType.bracket),
-                    ("[", TokenType.bracket),
-                    ("]", TokenType.bracket),
-                    ("{", TokenType.bracket),
-                    ("}", TokenType.bracket),
-                    ("<", TokenType.bracket),
-                    (">", TokenType.bracket)
+                    ("(", TokenType.Bracket),
+                    (")", TokenType.Bracket),
+                    ("[", TokenType.Bracket),
+                    ("]", TokenType.Bracket),
+                    ("{", TokenType.Bracket),
+                    ("}", TokenType.Bracket),
+                    ("<", TokenType.Bracket),
+                    (">", TokenType.Bracket)
                 };
             }
             set { }
@@ -75,11 +77,11 @@ namespace SimpleTokenizer
             {
                 return new List<(string, TokenType)>
                 {
-                    (".", TokenType.separator),
-                    (";", TokenType.separator),
-                    (".", TokenType.separator),
-                    (",", TokenType.separator),
-                    (":", TokenType.separator)
+                    (".", TokenType.Separator),
+                    (";", TokenType.Separator),
+                    (".", TokenType.Separator),
+                    (",", TokenType.Separator),
+                    (":", TokenType.Separator)
                 };
             }
             set { }
@@ -90,8 +92,8 @@ namespace SimpleTokenizer
             {
                 return new List<(string, TokenType)>
                 {
-                    ("\"", TokenType.quotation),
-                    ("'", TokenType.quotation)
+                    ("\"", TokenType.Quotation),
+                    ("'", TokenType.Quotation)
                 };
             }
             set { }
@@ -102,10 +104,35 @@ namespace SimpleTokenizer
             {
                 return new List<(string, TokenType)>
                 {
-                    ("?", TokenType.quotation)
+                    ("?", TokenType.Quotation)
                 };
             }
             set { }
+        }
+
+        public string Highlight(List<Token> CodeTokens)
+        {
+            var lineNumber = CodeTokens?.First()?.LineNumber;
+            var str = new StringBuilder();
+
+            foreach (var token in CodeTokens)
+            {
+                if (lineNumber != (int)token.LineNumber)
+                {
+                    lineNumber = token.LineNumber;
+                    str.Append(Environment.NewLine);
+                }
+
+                if (token.Type == TokenType.Space)
+                {
+                    str.Append(" ");
+                }
+
+                str.Append(token.HtmlSymbol);
+
+            }
+
+            return str.ToString();
         }
 
         public string CurrentChar(string line, int location)
@@ -113,7 +140,7 @@ namespace SimpleTokenizer
             return line[location].ToString();
         }
 
-		public string NextChar(string line, int location)
+        public string NextChar(string line, int location)
         {
             return location + 1 < line.Length ? line[location + 1].ToString() : "";
         }
@@ -152,13 +179,15 @@ namespace SimpleTokenizer
             {
                 if (string.IsNullOrWhiteSpace(this.CurrentChar(line, i)))
                 {
+                    tokens.Add(item: new Token { Type = TokenType.Space, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+
                     ++i;
                     continue;
                 }
 
                 if (this.Brackets.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(item: new Token { Type = TokenType.bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    tokens.Add(item: new Token { Type = TokenType.Bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
                     ++i;
                     continue;
@@ -166,7 +195,7 @@ namespace SimpleTokenizer
 
                 if (this.Separators.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.Separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
                     ++i;
                     continue;
@@ -174,7 +203,7 @@ namespace SimpleTokenizer
 
                 if (this.Nullable.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.Nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
 
                     ++i;
                     continue;
@@ -193,7 +222,7 @@ namespace SimpleTokenizer
 
                     quotedString += this.CurrentChar(line, ++i);
 
-                    tokens.Add(new Token { Type = TokenType.quotedString, LineNumber = lineNumber, PositionStart = i, SymbolLength = quotedString.Length, Symbol = quotedString });
+                    tokens.Add(new Token { Type = TokenType.QuotedString, LineNumber = lineNumber, PositionStart = i, SymbolLength = quotedString.Length, Symbol = quotedString });
 
                     ++i;
                     continue;
@@ -216,14 +245,14 @@ namespace SimpleTokenizer
                 {
                     if (this.Keywords.Any(k => k.Item1 == symbol))
                     {
-                        tokens.Add(new Token { Type = TokenType.keyword, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
+                        tokens.Add(new Token { Type = TokenType.Keyword, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
 
                         symbolStart = i + 1;
                         symbol = string.Empty;
                     }
                     else
                     {
-                        tokens.Add(new Token { Type = TokenType.identifier, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
+                        tokens.Add(new Token { Type = (Util.IsNumeric(symbol) ? TokenType.Number : TokenType.Identifier), LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
 
                         symbolStart = i + 1;
                         symbol = string.Empty;
@@ -241,13 +270,13 @@ namespace SimpleTokenizer
             tokens
             .ForEach(t =>
             {
-                if (t.Type == TokenType.keyword || t.Type == TokenType.identifier || t.Type == TokenType.quotedString)
+                if (t.Type == TokenType.Keyword || t.Type == TokenType.Identifier || t.Type == TokenType.QuotedString || t.Type == TokenType.Number)
                 {
                     t.HtmlSymbol = $"<span class=\"{t.Type}\">{t.Symbol}</span>";
                 }
-                if (t.Type == TokenType.separator || t.Type == TokenType.quotation || t.Type == TokenType.bracket || t.Type == TokenType.nullable)
+                if (t.Type == TokenType.Separator || t.Type == TokenType.Quotation || t.Type == TokenType.Bracket || t.Type == TokenType.Nullable)
                 {
-                    t.HtmlSymbol = $"{t.Symbol}";
+                    t.HtmlSymbol = $"<span class=\"Identifier\">{t.Symbol}</span>";
                 }
             });
         }

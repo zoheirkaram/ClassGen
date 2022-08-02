@@ -82,6 +82,10 @@
       <Project>{ebb1c2f9-f393-4e75-9bda-7bc22c9e3355}</Project>
       <Name>Context</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SimpleTokenizer\SimpleTokenizer.csproj">
+      <Project>{3bd276e1-f972-4d6e-8e19-6f2bf6f0c75d}</Project>
+      <Name>SimpleTokenizer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

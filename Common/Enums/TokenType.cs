@@ -8,13 +8,14 @@ namespace Common.Enums
 {
     public enum TokenType
     {
-		keyword,
-		identifier,
-		bracket,
-		quotation,
-		separator,
-		space,
-		quotedString,
-		nullable
+		Keyword,
+		Identifier,
+		Bracket,
+		Quotation,
+		Separator,
+		Space,
+		QuotedString,
+		Nullable,
+		Number
 	}
 }

@@ -11,8 +11,8 @@ namespace ConsoleTest
 	{
 		static async Task Main(string[] args)
 		{
-			var connectinoString = @"Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI";
-			var tableName = "TableName";
+			var connectinoString = @"Data Source=DESKTOP-UA91BKA\SQLEXPRESS;Initial Catalog=PTC;Integrated Security=SSPI";
+			var tableName = "Address";
 			var context = new SqlContext(connectinoString);
 
 			context.SetTableName(tableName);
@@ -29,29 +29,30 @@ namespace ConsoleTest
 				ShowTableName = true,
 				EnumerateSimilarForeignKeyProperties = false
 			};
-			var highlightColors = new CSharpHighlightColor() { KeywordColor = "1d44a7" };
+			var highlightColors = new HighlightColor() { Keyword = "1d44a7" };
 
 			//var convert = new TableConverter(tableName);
-			var converter = new CSharpConverter(classOptions);
-			//var convert = new TableConverter(classOptions, highlightColors);
+			var convert = new CSharpConverter(classOptions);
+			//var convert = new CSharpConverter(classOptions, highlightColors);
 
 			var tableSchemaResult = await context.GetTableData<TableSchemaResult>();
 
-			converter.TableSchama = tableSchemaResult;
+			convert.TableSchama = tableSchemaResult;
 
-			var @class = converter.GetClass();
-			//var classHtmlDocument = convert.GetHighlightedCSharpClass();
+			var @class = convert.GetClass();
+			var classHtmlDocument = convert.GetHighlightedClass();
 
-			Console.WriteLine($"Token\t\tLineNumber\t[Start, Length]\t\tSymbol");
+			var st = new SimpleTokenizer.CSharpTokenizer();
+			var tokens = st.GetTokens(@class);
+			var html = st.Highlight(tokens);
+			//tokens.ForEach(token =>
+			//{
+			//	Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");
+			//});
 
-			var tokens = new SimpleTokenizer.CSharpTokenizer().GetTokens(@class);
-			tokens.ForEach(token =>
-			{
-				Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");
-			});
-
-			Console.WriteLine(@class);
-			//Console.WriteLine(classHtmlDocument);
+			//Console.WriteLine(@class);
+			Console.WriteLine(classHtmlDocument);
+			//Console.WriteLine(html);
 			Console.ReadLine();
 		}
 	}

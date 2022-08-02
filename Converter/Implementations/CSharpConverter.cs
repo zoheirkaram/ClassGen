@@ -14,7 +14,7 @@ namespace Converter
 		public List<TableSchemaResult> TableSchama { set; get; }
 
 		private ConvertOptions _classOptions;
-		private CSharpHighlightColor _highlightColors;
+		private HighlightColor _highlightColors;
 		private string _style = string.Empty;
 
 		public CSharpConverter(string tableName)
@@ -29,10 +29,10 @@ namespace Converter
 			this.setStyle();
 		}
 
-		public CSharpConverter(ConvertOptions classOptions, CSharpHighlightColor cSharpHighlightColor)
+		public CSharpConverter(ConvertOptions classOptions, HighlightColor cSharpHighlightColor)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
-			this._highlightColors = cSharpHighlightColor ?? new CSharpHighlightColor();
+			this._highlightColors = cSharpHighlightColor ?? new HighlightColor();
 			this.setStyle();
 		}
 
@@ -105,10 +105,13 @@ namespace Converter
 
 		public string GetHighlightedClass()
 		{
-			string html = Highlighter.HighlightCSharp(this.GetClass());
+			//string html = Highlighter.HighlightCSharp(this.GetClass());
+			var tokenizer = new SimpleTokenizer.CSharpTokenizer();
+			var tokens = tokenizer.GetTokens(this.GetClass());
+			var html = tokenizer.Highlight(tokens);
 
-			html = html.Insert(0, $"<style>{_style}</style><body>").Replace("-----", "<hr />");
-			html = html.Insert(html.Length, "</body>");
+			html = html.Insert(0, $"<style>{_style}</style><body><div class=\"highlight\"><pre>").Replace("-----", "<hr />");
+			html = html.Insert(html.Length, "</pre></div></body>");
 
 			return html;
 		}
@@ -117,17 +120,19 @@ namespace Converter
 		{
 			if (_highlightColors == null)
 			{
-				this._highlightColors = new CSharpHighlightColor();
+				this._highlightColors = new HighlightColor();
 			}
 
 			_style = $@"
-						body {{ background-color: {_highlightColors.BackgroundColor};}}
-						.highlight.csharp {{ color: #333; font-size: 12px; line-height: 16px; }}
-						.highlight.csharp .identifier {{ color: #{_highlightColors.IdentifierColor}; }}
-						.highlight.csharp .keyword {{ color: #{_highlightColors.KeywordColor}; }}
-						.highlight.csharp .comment {{ color: #{_highlightColors.CommentColor}; }}
-						.highlight.csharp .string {{ color: #{_highlightColors.StringColor}; }}
-						.highlight.csharp .constant {{ color: #{_highlightColors.ConstantColor}; }}
+						body {{ background-color: #{_highlightColors.Background};}}
+						.highlight {{ color: #333; font-size: 12px; line-height: 16px; }}
+						.highlight .Identifier {{ color: #{_highlightColors.Identifier}; }}
+						.highlight .Keyword {{ color: #{_highlightColors.Keyword}; }}
+						.highlight .Comment {{ color: #{_highlightColors.Comment}; }}
+						.highlight .QuotedString {{ color: #{_highlightColors.QuotedString}; }}
+						.highlight .Constant {{ color: #{_highlightColors.Constant}; }}
+						.highlight .Number {{ color: #{_highlightColors.Number}; }}
+						.highlight .Bracket {{ color: #{_highlightColors.Identifier}; }}
 					";
 		}
 
