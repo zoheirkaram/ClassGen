@@ -35,7 +35,7 @@ namespace ConsoleTest
 			var convert = new CSharpConverter(classOptions);
 			//var convert = new CSharpConverter(classOptions, highlightColors);
 
-			var tableSchemaResult = await context.GetTableData<TableSchemaResult>();
+			var tableSchemaResult = await context.GetTableDataAsync<TableSchemaResult>();
 
 			convert.TableSchama = tableSchemaResult;
 
@@ -45,6 +45,7 @@ namespace ConsoleTest
 			var st = new SimpleTokenizer.CSharpTokenizer();
 			var tokens = st.GetTokens(@class);
 			//var html = st.Highlight(tokens);
+
 			tokens.ForEach(token =>
 			{
 				Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");

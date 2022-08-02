@@ -35,7 +35,7 @@ namespace TableToClass
             {
 				this.btnConnect.IsEnabled = false;
 				this.context = new SqlContext(this.txtConnection.Text);
-				this.cboTables.ItemsSource = await this.context.GetTables();
+				this.cboTables.ItemsSource = await this.context.GetTablesAsync();
 				this.btnConnect.IsEnabled = true;
 			}
 			catch (Exception ex)
@@ -69,7 +69,7 @@ namespace TableToClass
 					context.SetTableName(this.cboTables.Text);
 
 					var converter = new CSharpConverter(classOptions);
-					var tableSchemaResult = await context.GetTableData<TableSchemaResult>();
+					var tableSchemaResult = await context.GetTableDataAsync<TableSchemaResult>();
 
 					converter.TableSchama = tableSchemaResult;
 

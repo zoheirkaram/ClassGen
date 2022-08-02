@@ -8,10 +8,10 @@ namespace DBContext
 	public interface IContext
 	{
 		void SetTableName(string tableName);
-		Task<SqlConnection> GetConnection();
-		Task<SqlCommand> GetCommand(string commandString);
-		Task<List<String>> GetTables();
-		Task<List<T>> GetTableData<T>();
+		Task<SqlConnection> GetConnectionAsync();
+		Task<SqlCommand> GetCommandAsync(string commandString);
+		Task<List<String>> GetTablesAsync();
+		Task<List<T>> GetTableDataAsync<T>();
 		string CommandString(string tableName);
 	}
 }

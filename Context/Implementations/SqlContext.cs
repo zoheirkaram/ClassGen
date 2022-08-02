@@ -21,7 +21,7 @@ namespace DBContext
 			this._tableName = tableName;
 		}
 
-		public async Task<SqlConnection> GetConnection()
+		public async Task<SqlConnection> GetConnectionAsync()
 		{
 			var connection = new SqlConnection(this._connectionString);
 
@@ -33,9 +33,9 @@ namespace DBContext
 			return connection;
 		}
 
-		public async Task<SqlCommand> GetCommand(string commandString)
+		public async Task<SqlCommand> GetCommandAsync(string commandString)
 		{
-			var connection = await GetConnection();
+			var connection = await GetConnectionAsync();
 			var command = new SqlCommand(commandString, connection);
 
 			command.CommandType = CommandType.Text;
@@ -43,10 +43,10 @@ namespace DBContext
 			return command;
 		}
 
-		public async Task<List<String>> GetTables()
+		public async Task<List<String>> GetTablesAsync()
 		{
 			var sqlCommandString = "SELECT t.name FROM sys.tables t ORDER BY t.name";
-			var command = await this.GetCommand(sqlCommandString);
+			var command = await this.GetCommandAsync(sqlCommandString);
 			var reader = command.ExecuteReader();
 			var tables = new List<string>();
 
@@ -58,10 +58,10 @@ namespace DBContext
 			return tables;
 		}
 
-		public async Task<List<T>> GetTableData<T>()
+		public async Task<List<T>> GetTableDataAsync<T>()
 		{
 			var commandString = this.CommandString(_tableName);
-			var command = await this.GetCommand(commandString);
+			var command = await this.GetCommandAsync(commandString);
 			var reader = await command.ExecuteReaderAsync();
 			var tableResult = new List<T>();
 
