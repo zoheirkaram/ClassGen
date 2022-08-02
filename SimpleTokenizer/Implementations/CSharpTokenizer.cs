@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace SimpleTokenizer
 {
-	public class CSharpTokenizer : ITokenizer
+	public class CSharpTokenizer : ITokenizer, IDisposable
     {
         public List<(string, TokenType)> Keywords
         {
@@ -117,7 +118,7 @@ namespace SimpleTokenizer
 
             foreach (var token in CodeTokens)
             {
-                if (lineNumber != (int)token.LineNumber)
+                if (lineNumber != token.LineNumber)
                 {
                     lineNumber = token.LineNumber;
                     stringBuilder.Append(Environment.NewLine);
@@ -279,7 +280,7 @@ namespace SimpleTokenizer
                     }
                     else
                     {
-                        tokens.Add(new Token { Type = (Util.IsNumeric(symbol) ? TokenType.Number : TokenType.Identifier), LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
+                        tokens.Add(new Token { Type = Util.IsNumeric(symbol) ? TokenType.Number : TokenType.Identifier, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
 
                         symbolStart = i + 1;
                         symbol = string.Empty;
@@ -307,5 +308,23 @@ namespace SimpleTokenizer
                 }
             });
         }
-	}
+
+		public void Dispose()
+		{
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.Keywords = null;
+                this.Brackets = null;
+                this.Separators = null;
+                this.Quotations = null;
+                this.Nullable = null;
+            }
+        }
+    }
 }

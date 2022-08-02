@@ -8,7 +8,7 @@ using Pluralize.NET.Core;
 
 namespace ClassConverter
 {
-	public class CSharpConverter : IConverter
+	public class CSharpConverter : IConverter, IDisposable
     {
 		public List<TableSchemaResult> TableSchama { set; get; }
 
@@ -19,20 +19,20 @@ namespace ClassConverter
 		public CSharpConverter(string tableName)
 		{
 			this._classOptions = new ConvertOptions() { TableName = tableName };
-			this.setStyle();
+			this.SetStyle();
 		}
 
 		public CSharpConverter(ConvertOptions classOptions)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
-			this.setStyle();
+			this.SetStyle();
 		}
 
 		public CSharpConverter(ConvertOptions classOptions, HighlightColor cSharpHighlightColor)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
 			this._highlightColors = cSharpHighlightColor ?? new HighlightColor();
-			this.setStyle();
+			this.SetStyle();
 		}
 
 		public string GetClass()
@@ -105,18 +105,20 @@ namespace ClassConverter
 
 		public string GetHighlightedClass()
 		{
-			//string html = Highlighter.HighlightCSharp(this.GetClass());
-			var tokenizer = new SimpleTokenizer.CSharpTokenizer();
-			var tokens = tokenizer.GetTokens(this.GetClass());
-			var html = tokenizer.Highlight(tokens);
+			using (var tokenizer = new SimpleTokenizer.CSharpTokenizer())
+			{
+				var tokens = tokenizer.GetTokens(this.GetClass());
+				var html = tokenizer.Highlight(tokens);
 
-			html = html.Insert(0, $"<style>{_style}</style><body><div class=\"highlight\"><pre>").Replace("-----", "<hr />");
-			html = html.Insert(html.Length, "</pre></div></body>");
+				html = html.Insert(0, $"<style>{_style}</style><body><div class=\"highlight\"><pre>").Replace("-----", "<hr />");
+				html = html.Insert(html.Length, "</pre></div></body>");
 
-			return html;
+				return html;
+			};
+
 		}
 
-		private void setStyle()
+		private void SetStyle()
 		{
 			if (_highlightColors == null)
 			{
@@ -136,5 +138,21 @@ namespace ClassConverter
 					";
 		}
 
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				this.TableSchama = null;
+				this._classOptions = null;
+				this._highlightColors = null;
+				this._style = null;
+			}
+		}
 	}
 }

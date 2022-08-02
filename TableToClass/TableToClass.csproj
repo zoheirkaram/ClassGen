@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon\icon.ico</ApplicationIcon>
+    <AssemblyName>ClassGen</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
