@@ -2,9 +2,11 @@
 Simple application to convert a selected table to C# class (Entity or Contract)
 
 - Contains Console and WPF implementations.
+- Contains simple tokenizer to be used for class highlighting.
+
+#### Dependencies
 - @rvegajr - https://github.com/rvegajr/Pluralize.NET.Core For pluralization/singularazation used when generating C# class.
-- @abjerner - https://github.com/abjerner/Skybrud.SyntaxHighlighter For C# highlighting as html document.
 
 ### Screenshot
 
-![image](https://user-images.githubusercontent.com/12003810/182009713-de9a0481-5eef-4cad-83d8-2ef77a2648cc.png)
+![image](https://user-images.githubusercontent.com/12003810/182435886-6059d22c-071b-44f5-9e40-994358a33525.png)
