@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Context\Context.csproj" />
-    <ProjectReference Include="..\Converter\Converter.csproj" />
+    <ProjectReference Include="..\Context\DBContext.csproj" />
+    <ProjectReference Include="..\Converter\ClassConverter.csproj" />
 	<PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
   </ItemGroup>
 

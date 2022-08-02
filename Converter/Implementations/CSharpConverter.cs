@@ -6,7 +6,7 @@ using Common.Classes;
 using Common.Enums;
 using Pluralize.NET.Core;
 
-namespace Converter
+namespace ClassConverter
 {
 	public class CSharpConverter : IConverter
     {

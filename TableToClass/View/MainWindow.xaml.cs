@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows;
-using Context;
+using DBContext;
 using Common.Enums;
 using System.Linq;
 using Common.Classes;
-using Converter;
+using ClassConverter;
 
 namespace TableToClass
 {
