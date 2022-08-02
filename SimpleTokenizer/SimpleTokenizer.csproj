@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ITokenizer.cs" />
-    <Compile Include="Implementations\CSharpTokenize.cs" />
+    <Compile Include="Implementations\CSharpTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

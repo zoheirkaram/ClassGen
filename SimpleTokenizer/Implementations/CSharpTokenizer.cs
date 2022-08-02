@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SimpleTokenizer
 {
-	public class CSharpTokenize : ITokenizer
+	public class CSharpTokenizer : ITokenizer
     {
         public List<(string, TokenType)> Keywords
         {

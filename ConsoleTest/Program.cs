@@ -11,8 +11,8 @@ namespace ConsoleTest
 	{
 		static async Task Main(string[] args)
 		{
-			var connectinoString = @"Data Source=.;Integrated Security=SSPI;Initial Catalog=AdventureWorks2017";
-			var tableName = "WorkOrder";
+			var connectinoString = @"Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI";
+			var tableName = "TableName";
 			var context = new SqlContext(connectinoString);
 
 			context.SetTableName(tableName);
@@ -44,7 +44,7 @@ namespace ConsoleTest
 
 			Console.WriteLine($"Token\t\tLineNumber\t[Start, Length]\t\tSymbol");
 
-			var tokens = new SimpleTokenizer.CSharpTokenize().GetTokens(@class);
+			var tokens = new SimpleTokenizer.CSharpTokenizer().GetTokens(@class);
 			tokens.ForEach(token =>
 			{
 				Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");
