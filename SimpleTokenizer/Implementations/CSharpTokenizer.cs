@@ -53,58 +53,58 @@ namespace SimpleTokenizer
             }
             set { }
         }
-        public List<(string, TokenType)> Brackets
+        public List<(char, TokenType)> Brackets
         {
             get
             {
-                return new List<(string, TokenType)>
+                return new List<(char, TokenType)>
                 {
-                    ("(", TokenType.Bracket),
-                    (")", TokenType.Bracket),
-                    ("[", TokenType.Bracket),
-                    ("]", TokenType.Bracket),
-                    ("{", TokenType.Bracket),
-                    ("}", TokenType.Bracket),
-                    ("<", TokenType.Bracket),
-                    (">", TokenType.Bracket)
+                    ('(', TokenType.Bracket),
+                    (')', TokenType.Bracket),
+                    ('[', TokenType.Bracket),
+                    (']', TokenType.Bracket),
+                    ('{', TokenType.Bracket),
+                    ('}', TokenType.Bracket),
+                    ('<', TokenType.Bracket),
+                    ('>', TokenType.Bracket)
                 };
             }
             set { }
         }
-        public List<(string, TokenType)> Separators
+        public List<(char, TokenType)> Separators
         {
             get
             {
-                return new List<(string, TokenType)>
+                return new List<(char, TokenType)>
                 {
-                    (".", TokenType.Separator),
-                    (";", TokenType.Separator),
-                    (".", TokenType.Separator),
-                    (",", TokenType.Separator),
-                    (":", TokenType.Separator)
+                    ('.', TokenType.Separator),
+                    (';', TokenType.Separator),
+                    ('.', TokenType.Separator),
+                    (',', TokenType.Separator),
+                    (':', TokenType.Separator)
                 };
             }
             set { }
         }
-        public List<(string, TokenType)> Quotations
+        public List<(char, TokenType)> Quotations
         {
             get
             {
-                return new List<(string, TokenType)>
+                return new List<(char, TokenType)>
                 {
-                    ("\"", TokenType.Quotation),
-                    ("'", TokenType.Quotation)
+                    ('"', TokenType.Quotation),
+                    ('\'', TokenType.Quotation)
                 };
             }
             set { }
         }
-        public List<(string, TokenType)> Nullable
+        public List<(char, TokenType)> Nullable
         {
             get
             {
-                return new List<(string, TokenType)>
+                return new List<(char, TokenType)>
                 {
-                    ("?", TokenType.Quotation)
+                    ('?', TokenType.Quotation)
                 };
             }
             set { }
@@ -113,36 +113,41 @@ namespace SimpleTokenizer
         public string Highlight(List<Token> CodeTokens)
         {
             var lineNumber = CodeTokens?.First()?.LineNumber;
-            var str = new StringBuilder();
+            var stringBuilder = new StringBuilder();
 
             foreach (var token in CodeTokens)
             {
                 if (lineNumber != (int)token.LineNumber)
                 {
                     lineNumber = token.LineNumber;
-                    str.Append(Environment.NewLine);
+                    stringBuilder.Append(Environment.NewLine);
                 }
 
                 if (token.Type == TokenType.Space)
                 {
-                    str.Append(" ");
+                    stringBuilder.Append(" ");
                 }
 
-                str.Append(token.HtmlSymbol);
+                if (token.Type == TokenType.Tab)
+				{
+                    stringBuilder.Append('\t');
+				}
+
+                stringBuilder.Append(token.HtmlSymbol);
 
             }
 
-            return str.ToString();
+            return stringBuilder.ToString();
         }
 
-        public string CurrentChar(string line, int location)
+        public char CurrentChar(string line, int location)
         {
-            return line[location].ToString();
+            return line[location];
         }
 
-        public string NextChar(string line, int location)
+        public char NextChar(string line, int location)
         {
-            return location + 1 < line.Length ? line[location + 1].ToString() : "";
+            return location + 1 < line.Length ? line[location + 1] : '\0';
         }
 
         public List<Token> GetTokens(string code)
@@ -154,7 +159,7 @@ namespace SimpleTokenizer
 
             while (lineNumber <= codeLines.Length)
             {
-                var lineTokens = this.TokenizLine(codeLines[lineNumber - 1].Trim(), lineNumber);
+                var lineTokens = this.TokenizLine(codeLines[lineNumber - 1], lineNumber);
 
                 codeTokens.AddRange(lineTokens);
 
@@ -177,9 +182,31 @@ namespace SimpleTokenizer
 
             while (i < line.Length)
             {
-                if (string.IsNullOrWhiteSpace(this.CurrentChar(line, i)))
+                if (string.IsNullOrWhiteSpace(this.CurrentChar(line, i).ToString()))
                 {
-                    tokens.Add(item: new Token { Type = TokenType.Space, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    TokenType tokenType;
+
+                    switch (this.CurrentChar(line, i))
+					{
+                        case '\t':
+                            tokenType = TokenType.Tab;
+                            break;
+
+                        case '\r':
+                        case '\n':
+                            tokenType = TokenType.NewLine;
+                            break;
+
+                        case ' ':
+                            tokenType = TokenType.Space;
+                            break;
+
+                        default:
+                            tokenType = TokenType.None;
+                            break;
+					}
+
+                    tokens.Add(item: new Token { Type = tokenType, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i).ToString() });
 
                     ++i;
                     continue;
@@ -187,7 +214,7 @@ namespace SimpleTokenizer
 
                 if (this.Brackets.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(item: new Token { Type = TokenType.Bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    tokens.Add(item: new Token { Type = TokenType.Bracket, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i).ToString() });
 
                     ++i;
                     continue;
@@ -195,7 +222,7 @@ namespace SimpleTokenizer
 
                 if (this.Separators.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.Separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.Separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i).ToString() });
 
                     ++i;
                     continue;
@@ -203,7 +230,7 @@ namespace SimpleTokenizer
 
                 if (this.Nullable.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    tokens.Add(new Token { Type = TokenType.Nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i) });
+                    tokens.Add(new Token { Type = TokenType.Nullable, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i).ToString() });
 
                     ++i;
                     continue;
@@ -211,9 +238,9 @@ namespace SimpleTokenizer
 
                 if (this.Quotations.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
-                    quotedString = this.CurrentChar(line, i);
+                    quotedString = this.CurrentChar(line, i).ToString();
 
-                    while (this.NextChar(line, i) != "\"")
+                    while (this.NextChar(line, i).ToString() != "\"")
                     {
                         quotedString += this.NextChar(line, i);
 
@@ -239,7 +266,7 @@ namespace SimpleTokenizer
                         ||
                         this.Nullable.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        string.IsNullOrWhiteSpace(this.NextChar(line, i))
+                        string.IsNullOrWhiteSpace(this.NextChar(line, i).ToString())
                     )
 
                 {

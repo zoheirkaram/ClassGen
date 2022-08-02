@@ -31,14 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ColorCode, Version=1.0.1.62759, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ColorCode.1.0.1\lib\ColorCode.dll</HintPath>
-    </Reference>
     <Reference Include="Pluralize.NET.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Pluralize.NET.Core.1.0.0\lib\netstandard2.0\Pluralize.NET.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Skybrud.SyntaxHighlighter, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.SyntaxHighlighter.1.0.4\lib\net45\Skybrud.SyntaxHighlighter.dll</HintPath>
     </Reference>
     <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\Pluralize.NET.Core.1.0.0\lib\netstandard2.0\System.dll</HintPath>

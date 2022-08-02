@@ -5,7 +5,6 @@ using System.Text;
 using Common.Classes;
 using Common.Enums;
 using Pluralize.NET.Core;
-using Skybrud.SyntaxHighlighter;
 
 namespace Converter
 {
@@ -41,7 +40,7 @@ namespace Converter
 			var nullableSqlTypes = new List<string> { "bigint, bit, date, datetime, datetime2, datetimeoffset, decimal, float, int, money, numeric, real, smalldatetime, smallint, smallmoney, time, tinyint, uniqueidentifier" };
 			var stringBuilder = new StringBuilder();
 
-			if (this._classOptions.ClassType == ClassType.Entity)	
+			if (this._classOptions.ClassType == ClassType.Entity)
 			{
 				stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations;");
 
@@ -53,6 +52,7 @@ namespace Converter
 				stringBuilder.AppendLine("");
 				stringBuilder.AppendLine("-----");
 				stringBuilder.AppendLine("");
+
 				if (this._classOptions.ShowTableName)
                 {
 					stringBuilder.AppendLine($"[Table(\"{this._classOptions.TableName}\")]");
@@ -76,7 +76,7 @@ namespace Converter
 					{
 						if (td.MaxLength > 0)
 						{
-							stringBuilder.AppendLine($"\t[MaxLength(\"{td.MaxLength}\")]");
+							_ = stringBuilder.AppendLine($"\t[MaxLength(\"{td.MaxLength}\")]");
 						}
 					}
 				}

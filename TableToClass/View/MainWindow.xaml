@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Table To Class"
-		Height="577"
-		Width="1001"
+		Height="622"
+		Width="1037"
 		Background="#FF575757" Loaded="OnLoad"
 		ResizeMode="NoResize">
 	<Grid Margin="10">
@@ -71,7 +71,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="761"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<WebBrowser x:Name="htmlDisplay" HorizontalAlignment="Center" Height="471" VerticalAlignment="Center" Width="741" Grid.Row="1" Grid.Column="1"/>
+			<WebBrowser x:Name="htmlDisplay" Margin="10,7,0,-35" HorizontalAlignment="Left" Width="777"/>
 		</Grid>
 	</Grid>
 
