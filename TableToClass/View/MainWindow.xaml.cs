@@ -6,7 +6,7 @@ using System.Linq;
 using Common.Classes;
 using Converter;
 
-namespace TableToCSharp
+namespace TableToClass
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
