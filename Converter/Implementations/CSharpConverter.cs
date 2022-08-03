@@ -5,15 +5,13 @@ using System.Text;
 using Common.Classes;
 using Common.Enums;
 using Pluralize.NET.Core;
+using Converter;
 
 namespace ClassConverter
 {
-	public class CSharpConverter : IConverter, IDisposable
+	public class CSharpConverter : BaseConverter, IConverter, IDisposable
     {
-		public List<TableSchemaResult> TableSchama { set; get; }
-
 		private ConvertOptions _classOptions;
-		private string _style = string.Empty;
 
 		public CSharpConverter(string tableName)
 		{
@@ -93,37 +91,6 @@ namespace ClassConverter
 			return stringBuilder.ToString();
 		}
 
-		public string GetHighlightedClass()
-		{
-			using (var tokenizer = new SimpleTokenizer.CSharpTokenizer())
-			{
-				this.SetStyle();
-
-				var tokens = tokenizer.GetTokens(this.GetClass());
-				var html = tokenizer.Highlight(tokens);
-
-				html = html.Insert(0, $"<style>{_style}</style><body><div class=\"highlight\"><pre>").Replace("-----", "<hr />");
-				html = html.Insert(html.Length, "</pre></div></body>");
-
-				return html;
-			};
-		}
-
-		private void SetStyle()
-		{
-			_style = $@"
-						body {{ background-color: #{HighlightColor.Background};}}
-						.highlight {{ color: #333; font-size: 12px; line-height: 16px; }}
-						.highlight .Identifier {{ color: #{HighlightColor.Identifier}; }}
-						.highlight .Keyword {{ color: #{HighlightColor.Keyword}; }}
-						.highlight .Comment {{ color: #{HighlightColor.Comment}; }}
-						.highlight .QuotedString {{ color: #{HighlightColor.QuotedString}; }}
-						.highlight .Constant {{ color: #{HighlightColor.Constant}; }}
-						.highlight .Number {{ color: #{HighlightColor.Number}; }}
-						.highlight .Bracket {{ color: #{HighlightColor.Identifier}; }}
-					";
-		}
-
 		public void Dispose()
 		{
 			Dispose(true);
@@ -136,7 +103,6 @@ namespace ClassConverter
 			{
 				this.TableSchama = null;
 				this._classOptions = null;
-				this._style = null;
 			}
 		}
 	}

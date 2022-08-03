@@ -11,6 +11,5 @@ namespace ClassConverter
     {
         List<TableSchemaResult> TableSchama { get; set; }
         string GetClass();
-        string GetHighlightedClass();
     }
 }

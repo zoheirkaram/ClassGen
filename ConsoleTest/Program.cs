@@ -38,11 +38,11 @@ namespace ConsoleTest
 			convert.TableSchama = tableSchemaResult;
 
 			var @class = convert.GetClass();
-			var classHtmlDocument = convert.GetHighlightedClass();
+			var classHtmlDocument = convert.GetHighlightedHtmlCode(@class);
 
 			var st = new SimpleTokenizer.CSharpTokenizer();
 			var tokens = st.GetTokens(@class);
-			//var html = st.Highlight(tokens);
+			var html = st.Highlight(tokens);
 
 			tokens.ForEach(token =>
 			{

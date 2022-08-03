@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\TokenizerBase.cs" />
     <Compile Include="Interfaces\ITokenizer.cs" />
     <Compile Include="Implementations\CSharpTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

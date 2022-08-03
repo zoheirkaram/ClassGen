@@ -72,7 +72,8 @@ namespace TableToClass
 
 					converter.TableSchama = tableSchemaResult;
 
-					var @class = converter.GetHighlightedClass();
+					var code = converter.GetClass();
+					var @class = converter.GetHighlightedHtmlCode(code);
 
 					this.htmlDisplay.NavigateToString(@class);
 					this.btnGenerateClass.IsEnabled = true;
