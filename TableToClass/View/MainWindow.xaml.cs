@@ -8,9 +8,6 @@ using ClassConverter;
 
 namespace TableToClass
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		public SqlContext context;
@@ -22,6 +19,8 @@ namespace TableToClass
 
 		private void OnLoad(object sender, RoutedEventArgs e)
 		{
+			this.htmlDisplay.NavigateToString(Util.DefaultScreen());
+
 			this.cboObjectTypes.ItemsSource = Enum.GetValues(typeof(ClassType)).Cast<ClassType>();
 			this.cboModifiers.ItemsSource = Enum.GetValues(typeof(Modifier)).Cast<Modifier>();
 

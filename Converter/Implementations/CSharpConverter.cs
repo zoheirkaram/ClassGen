@@ -13,26 +13,16 @@ namespace ClassConverter
 		public List<TableSchemaResult> TableSchama { set; get; }
 
 		private ConvertOptions _classOptions;
-		private HighlightColor _highlightColors;
 		private string _style = string.Empty;
 
 		public CSharpConverter(string tableName)
 		{
 			this._classOptions = new ConvertOptions() { TableName = tableName };
-			this.SetStyle();
 		}
 
 		public CSharpConverter(ConvertOptions classOptions)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
-			this.SetStyle();
-		}
-
-		public CSharpConverter(ConvertOptions classOptions, HighlightColor cSharpHighlightColor)
-		{
-			this._classOptions = classOptions ?? new ConvertOptions();
-			this._highlightColors = cSharpHighlightColor ?? new HighlightColor();
-			this.SetStyle();
 		}
 
 		public string GetClass()
@@ -107,6 +97,8 @@ namespace ClassConverter
 		{
 			using (var tokenizer = new SimpleTokenizer.CSharpTokenizer())
 			{
+				this.SetStyle();
+
 				var tokens = tokenizer.GetTokens(this.GetClass());
 				var html = tokenizer.Highlight(tokens);
 
@@ -115,26 +107,20 @@ namespace ClassConverter
 
 				return html;
 			};
-
 		}
 
 		private void SetStyle()
 		{
-			if (_highlightColors == null)
-			{
-				this._highlightColors = new HighlightColor();
-			}
-
 			_style = $@"
-						body {{ background-color: #{_highlightColors.Background};}}
+						body {{ background-color: #{HighlightColor.Background};}}
 						.highlight {{ color: #333; font-size: 12px; line-height: 16px; }}
-						.highlight .Identifier {{ color: #{_highlightColors.Identifier}; }}
-						.highlight .Keyword {{ color: #{_highlightColors.Keyword}; }}
-						.highlight .Comment {{ color: #{_highlightColors.Comment}; }}
-						.highlight .QuotedString {{ color: #{_highlightColors.QuotedString}; }}
-						.highlight .Constant {{ color: #{_highlightColors.Constant}; }}
-						.highlight .Number {{ color: #{_highlightColors.Number}; }}
-						.highlight .Bracket {{ color: #{_highlightColors.Identifier}; }}
+						.highlight .Identifier {{ color: #{HighlightColor.Identifier}; }}
+						.highlight .Keyword {{ color: #{HighlightColor.Keyword}; }}
+						.highlight .Comment {{ color: #{HighlightColor.Comment}; }}
+						.highlight .QuotedString {{ color: #{HighlightColor.QuotedString}; }}
+						.highlight .Constant {{ color: #{HighlightColor.Constant}; }}
+						.highlight .Number {{ color: #{HighlightColor.Number}; }}
+						.highlight .Bracket {{ color: #{HighlightColor.Identifier}; }}
 					";
 		}
 
@@ -150,7 +136,6 @@ namespace ClassConverter
 			{
 				this.TableSchama = null;
 				this._classOptions = null;
-				this._highlightColors = null;
 				this._style = null;
 			}
 		}

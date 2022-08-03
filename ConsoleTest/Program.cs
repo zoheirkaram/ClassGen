@@ -29,11 +29,9 @@ namespace ConsoleTest
 				ShowTableName = true,
 				EnumerateSimilarForeignKeyProperties = false
 			};
-			var highlightColors = new HighlightColor() { Keyword = "1d44a7" };
 
 			//var convert = new TableConverter(tableName);
 			var convert = new CSharpConverter(classOptions);
-			//var convert = new CSharpConverter(classOptions, highlightColors);
 
 			var tableSchemaResult = await context.GetTableDataAsync<TableSchemaResult>();
 

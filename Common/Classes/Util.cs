@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace Common.Classes
 {
@@ -15,6 +11,13 @@ namespace Common.Classes
 			result = result || decimal.TryParse(number, out _);
 
 			return result;
+		}
+
+		public static string DefaultScreen()
+{
+			return $"<style>body{{background-color: #{HighlightColor.Background};}}</style>" +
+				   $"<body><div class=\"highlight\"><pre>" +
+				   $"</pre></div></body>";
 		}
 	}
 }

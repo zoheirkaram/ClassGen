@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ClassGen"
 		Height="622"
 		Width="1037"
-		Background="#FF575757" Loaded="OnLoad"
+		Background="#FF404040" Loaded="OnLoad"
 		ResizeMode="NoResize">
 	<Grid Margin="10">
 		<Grid.RowDefinitions>
@@ -16,11 +15,11 @@
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="31.298"></ColumnDefinition>
-			<ColumnDefinition Width="198.702"/>
+			<ColumnDefinition Width="200"/>
+			<ColumnDefinition Width="120"/>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<Grid Grid.Row="2" Margin="0,0,0,10" Grid.ColumnSpan="2">
+		<Grid Grid.Row="2" Margin="0,0,0,5">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="30"></RowDefinition>
 				<RowDefinition Height="30"></RowDefinition>
@@ -37,8 +36,8 @@
 			</Grid.RowDefinitions>
 			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Margin="10,0,0,0" Foreground="Gainsboro"/>
 			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="124" Margin="10,0,0,0" Foreground="Gainsboro"/>
-			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="210"/>
-			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="210"/>
+			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="180"/>
+			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="180"/>
 			<CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
 			<CheckBox x:Name="chkShowForeignKey" Content="Show Foreign Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
 			<CheckBox x:Name="chkShowForeignProperty" Content="Show Foreign Property" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>
@@ -54,26 +53,19 @@
 				Generate Class
 			</Button>
 		</Grid>
-		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
-		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Foreground="Gainsboro" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
-		<TextBox x:Name="txtConnection" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="620" Height="20"/>
-		<Button x:Name="btnConnect" Content="Connect" Grid.Column="2" HorizontalAlignment="Left" Margin="635,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20">
+		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="auto" Foreground="Gainsboro" Margin="5,0,0,0" Grid.Column="1"/>
+		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="auto" Foreground="Gainsboro" Margin="5,0,0,0" Grid.Column="1"/>
+		<TextBox x:Name="txtConnection" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=(local);Initial Catalog=DatabaseName;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="545" Height="20"/>
+		<Button x:Name="btnConnect" Content="Connect" Grid.Column="2" HorizontalAlignment="Left" Margin="560,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20" Background="#FFDDDDDD">
 			<Button.Resources>
 				<Style TargetType="Border">
-					<Setter Property="CornerRadius" Value="5"/>
+					<Setter Property="CornerRadius" Value="3"/>
 				</Style>
 			</Button.Resources>
 		</Button>
 		<ComboBox x:Name="cboTables" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
-		<Grid Grid.Column="2" Grid.Row="2">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="491.04"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="761"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<WebBrowser x:Name="htmlDisplay" Margin="10,7,0,-35" HorizontalAlignment="Left" Width="777"/>
-		</Grid>
+		<WebBrowser Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="htmlDisplay" Margin="5,5,5,5" OpacityMask="#FF1E1E1E"/>
+		<Label x:Name="label" Content="ClassGen" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="36" FontWeight="Bold" FontStyle="Normal"/>
 	</Grid>
 
 </Window>
