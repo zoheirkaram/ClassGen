@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows;
-using DBContext;
+﻿using DBContext;
 using Common.Enums;
-using System.Linq;
 using Common.Classes;
-using ClassConverter;
+using Converter;
+using System;
+using System.Windows;
+using System.Linq;
 
 namespace TableToClass
 {
@@ -69,7 +69,7 @@ namespace TableToClass
 						EnumerateSimilarForeignKeyProperties = this.chkEnumerateSimilarFKProperties.IsChecked ?? false
 					};
 
-					var converter = new CSharpConverter(classOptions);
+					var converter = new TypeScriptConverter(classOptions);
 
 					var code = await converter.GetClass(context);
 					var @class = converter.GetHighlightedHtmlCode(code);

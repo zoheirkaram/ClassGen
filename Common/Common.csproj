@@ -46,6 +46,7 @@
     <Compile Include="Classes\TableSchemaResult.cs" />
     <Compile Include="Classes\Token.cs" />
     <Compile Include="Classes\Util.cs" />
+    <Compile Include="Enums\Language.cs" />
     <Compile Include="Enums\TokenType.cs" />
     <Compile Include="Enums\ClassType.cs" />
     <Compile Include="Enums\Modifier.cs" />

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Common.Enums;
+﻿using Common.Enums;
 using Common.Classes;
+using System.Collections.Generic;
 
 namespace SimpleTokenizer
 {

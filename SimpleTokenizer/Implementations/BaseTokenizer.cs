@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SimpleTokenizer
 {
-	public class TokenizerBase : ITokenizer
+	public class BaseTokenizer : ITokenizer, IDisposable
 	{
 		public virtual List<(string, TokenType)> Keywords { get; set; }
 		public virtual List<(char, TokenType)> Brackets { get; set; }
@@ -214,5 +214,22 @@ namespace SimpleTokenizer
             return stringBuilder.ToString();
         }
 
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.Keywords = null;
+                this.Brackets = null;
+                this.Separators = null;
+                this.Quotations = null;
+                this.Nullable = null;
+            }
+        }
     }
 }

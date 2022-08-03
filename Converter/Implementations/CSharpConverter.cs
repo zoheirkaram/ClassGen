@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Common.Classes;
-using Common.Enums;
-using Pluralize.NET.Core;
-using Converter;
 using DBContext;
+using Common.Enums;
 using System.Threading.Tasks;
+using Pluralize.NET.Core;
 
-namespace ClassConverter
+namespace Converter
 {
 	public class CSharpConverter : BaseConverter, IConverter, IDisposable
     {
 		private ConvertOptions _classOptions;
 
-		public CSharpConverter(string tableName)
+		public CSharpConverter(string tableName) : base (Language.CSharp)
 		{
 			this._classOptions = new ConvertOptions() { TableName = tableName };
 		}
 
-		public CSharpConverter(ConvertOptions classOptions)
+		public CSharpConverter(ConvertOptions classOptions) : base(Language.CSharp)
 		{
 			this._classOptions = classOptions ?? new ConvertOptions();
 		}

@@ -1,7 +1,7 @@
 ﻿using Common.Classes;
 using Common.Enums;
 using DBContext;
-using ClassConverter;
+using Converter;
 using System;
 using System.Threading.Tasks;
 
@@ -20,7 +20,7 @@ namespace ConsoleTest
 			var classOptions = new ConvertOptions
 			{
 				TableName = tableName,
-				Modifier = Modifier.Public,
+				Modifier = Modifier.Private,
 				ClassType = ClassType.Entity,
 				ShowForeignKey = true,
 				ShowForeignProperty = true,
@@ -31,20 +31,20 @@ namespace ConsoleTest
 			};
 
 			//var convert = new TableConverter(tableName);
-			var convert = new CSharpConverter(classOptions);
-			var @class = await convert.GetClass();
-			var classHtmlDocument = convert.GetHighlightedHtmlCode(@class);
+			var convert = new TypeScriptConverter(classOptions);
+			var @class = await convert.GetClass(context);
+			//var classHtmlDocument = convert.GetHighlightedHtmlCode(@class);
 
-			var st = new SimpleTokenizer.CSharpTokenizer();
-			var tokens = st.GetTokens(@class);
-			var html = st.Highlight(tokens);
+			//var st = new SimpleTokenizer.CSharpTokenizer();
+			//var tokens = st.GetTokens(@class);
+			//var html = st.Highlight(tokens);
 
-			tokens.ForEach(token =>
-			{
-				Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");
-			});
+			//tokens.ForEach(token =>
+			//{
+			//	Console.WriteLine($"{token.Type} \t\t {token.LineNumber} \t [{token.PositionStart}, {token.SymbolLength}] \t\t {token.Symbol}");
+			//});
 
-			//Console.WriteLine(@class);
+			Console.WriteLine(@class);
 			//Console.WriteLine(classHtmlDocument);
 			//Console.WriteLine(html);
 			Console.ReadLine();

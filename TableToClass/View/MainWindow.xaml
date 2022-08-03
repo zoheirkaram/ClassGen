@@ -10,8 +10,8 @@
 		ResizeMode="NoResize">
 	<Grid Margin="10">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="30"></RowDefinition>
-			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="25"></RowDefinition>
+			<RowDefinition Height="25"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
@@ -21,21 +21,21 @@
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Row="2" Margin="0,0,0,5">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
-				<RowDefinition Height="30"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
+				<RowDefinition Height="25"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="30"></RowDefinition>
 			</Grid.RowDefinitions>
-			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Margin="10,0,0,0" Foreground="Gainsboro"/>
-			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="124" Margin="10,0,0,0" Foreground="Gainsboro"/>
+			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro"/>
+			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro"/>
 			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="180"/>
 			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="180"/>
 			<CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True"/>

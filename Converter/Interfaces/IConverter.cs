@@ -1,8 +1,7 @@
-﻿using Common.Classes;
-using DBContext;
+﻿using DBContext;
 using System.Threading.Tasks;
 
-namespace ClassConverter
+namespace Converter
 {
     public interface IConverter
     {

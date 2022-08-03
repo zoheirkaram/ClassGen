@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Implementations\BaseConverter.cs" />
     <Compile Include="Implementations\CSharpConverter.cs" />
+    <Compile Include="Implementations\TypeScriptConverter.cs" />
     <Compile Include="Interfaces\IConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

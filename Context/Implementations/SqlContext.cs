@@ -69,7 +69,14 @@ namespace DBContext
 
 				foreach (var prop in obj.GetType().GetProperties())
 				{
-					prop.SetValue(obj, reader[prop.Name] == DBNull.Value ? null : reader[prop.Name]);
+					try
+					{
+						prop.SetValue(obj, reader[prop.Name] == DBNull.Value ? null : reader[prop.Name]);
+					}
+					catch(Exception)
+					{
+						prop.SetValue(obj, null);
+					}
 				}
 
 				tableResult.Add(obj);

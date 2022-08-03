@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
 using System.Collections.Generic;
-using Common.Enums;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SimpleTokenizer
 {
-	public class CSharpTokenizer : BaseTokenizer, IDisposable
+	public class TypeScriptTokenizer : BaseTokenizer, IDisposable
     {
         public override List<(string, TokenType)> Keywords
         {
@@ -14,38 +17,18 @@ namespace SimpleTokenizer
                 {
                     ("public", TokenType.Keyword),
                     ("private", TokenType.Keyword),
-                    ("internal", TokenType.Keyword),
                     ("protected", TokenType.Keyword),
-                    ("abstract", TokenType.Keyword),
-                    ("virtual", TokenType.Keyword),
 
-                    ("using", TokenType.Keyword),
-                    ("namespace", TokenType.Keyword),
                     ("class", TokenType.Keyword),
                     ("get", TokenType.Keyword),
                     ("set", TokenType.Keyword),
-                    ("const", TokenType.Keyword),
-                    ("null", TokenType.Keyword),
+                    ("this", TokenType.Keyword),
+                    ("constructor", TokenType.Keyword),
 
-                    ("bool", TokenType.Keyword),
-                    ("byte", TokenType.Keyword),
-                    ("char", TokenType.Keyword),
-                    ("decimal", TokenType.Keyword),
-                    ("double", TokenType.Keyword),
-                    ("extern", TokenType.Keyword),
-                    ("float", TokenType.Keyword),
-                    ("int", TokenType.Keyword),
-                    ("long", TokenType.Keyword),
-                    ("object", TokenType.Keyword),
-                    ("readonly", TokenType.Keyword),
-                    ("sbyte", TokenType.Keyword),
-                    ("short", TokenType.Keyword),
+                    ("boolean", TokenType.Keyword),
                     ("string", TokenType.Keyword),
-                    ("TimeSpan", TokenType.Keyword),
-                    ("DateTime", TokenType.Keyword),
-                    ("DateTimeOffset", TokenType.Keyword),
-                    ("Guid", TokenType.Keyword),
-
+                    ("number", TokenType.Keyword),
+                    ("Date", TokenType.Keyword),
                 };
             }
             set { }
@@ -101,10 +84,11 @@ namespace SimpleTokenizer
             {
                 return new List<(char, TokenType)>
                 {
-                    ('?', TokenType.Nullable)
+                    ('\0', TokenType.Nullable)
                 };
             }
             set { }
         }
+
     }
 }

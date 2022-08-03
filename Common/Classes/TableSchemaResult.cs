@@ -1,5 +1,4 @@
-﻿
-namespace Common.Classes
+﻿namespace Common.Classes
 {
 	public class TableSchemaResult
 	{

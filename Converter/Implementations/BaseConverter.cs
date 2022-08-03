@@ -1,21 +1,35 @@
-﻿using ClassConverter;
-using Common.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Classes;
+using Common.Enums;
+using SimpleTokenizer;
 
 namespace Converter
 {
 	public class BaseConverter
 	{
 		private string _style = string.Empty;
+		private Language _language;
+
+		public BaseConverter(Language language)
+		{
+			this._language = language;
+		}
 
 		public string GetHighlightedHtmlCode(string code)
 		{
-			using (var tokenizer = new SimpleTokenizer.CSharpTokenizer())
+			BaseTokenizer selectedTokenizer = new BaseTokenizer();
+
+			switch(_language)
+			{
+				case Language.CSharp:
+					selectedTokenizer = new CSharpTokenizer();
+					break;
+
+				case Language.TypeScript:
+					selectedTokenizer = new TypeScriptTokenizer();
+					break;
+			}
+
+			using (var tokenizer = selectedTokenizer)
 			{
 				this.SetStyle();
 
@@ -27,7 +41,7 @@ namespace Converter
 
 				return html;
 			};
-}
+		}
 
 		private void SetStyle()
 		{
@@ -43,7 +57,5 @@ namespace Converter
 						.highlight .Bracket {{ color: #{HighlightColor.Identifier}; }}
 					";
 		}
-
-
 	}
 }
