@@ -7,11 +7,11 @@ namespace DBContext
 {
 	public interface IContext
 	{
-		void SetTableName(string tableName);
+		string CommandString { get; set; }
+		void SetConnectionString(string connectionString);
 		Task<SqlConnection> GetConnectionAsync();
 		Task<SqlCommand> GetCommandAsync(string commandString);
 		Task<List<String>> GetTablesAsync();
 		Task<List<T>> GetTableDataAsync<T>();
-		string CommandString(string tableName);
 	}
 }

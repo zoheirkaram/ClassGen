@@ -33,9 +33,13 @@ namespace TableToClass
             try
             {
 				this.btnConnect.IsEnabled = false;
-				this.context = new SqlContext(this.txtConnection.Text);
+				this.context = new SqlContext();
+
+				context.SetConnectionString(this.txtConnection.Text);
+
 				this.cboTables.ItemsSource = await this.context.GetTablesAsync();
 				this.btnConnect.IsEnabled = true;
+
 			}
 			catch (Exception ex)
             {
@@ -65,14 +69,9 @@ namespace TableToClass
 						EnumerateSimilarForeignKeyProperties = this.chkEnumerateSimilarFKProperties.IsChecked ?? false
 					};
 
-					context.SetTableName(this.cboTables.Text);
-
 					var converter = new CSharpConverter(classOptions);
-					var tableSchemaResult = await context.GetTableDataAsync<TableSchemaResult>();
 
-					converter.TableSchama = tableSchemaResult;
-
-					var code = converter.GetClass();
+					var code = await converter.GetClass(context);
 					var @class = converter.GetHighlightedHtmlCode(code);
 
 					this.htmlDisplay.NavigateToString(@class);

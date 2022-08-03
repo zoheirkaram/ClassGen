@@ -13,9 +13,9 @@ namespace ConsoleTest
 		{
 			var connectinoString = @"Data Source=.;Initial Catalog=AdventureWorks2017;Integrated Security=SSPI";
 			var tableName = "Address";
-			var context = new SqlContext(connectinoString);
+			var context = new SqlContext();
 
-			context.SetTableName(tableName);
+			context.SetConnectionString(connectinoString);
 
 			var classOptions = new ConvertOptions
 			{
@@ -32,12 +32,7 @@ namespace ConsoleTest
 
 			//var convert = new TableConverter(tableName);
 			var convert = new CSharpConverter(classOptions);
-
-			var tableSchemaResult = await context.GetTableDataAsync<TableSchemaResult>();
-
-			convert.TableSchama = tableSchemaResult;
-
-			var @class = convert.GetClass();
+			var @class = await convert.GetClass();
 			var classHtmlDocument = convert.GetHighlightedHtmlCode(@class);
 
 			var st = new SimpleTokenizer.CSharpTokenizer();

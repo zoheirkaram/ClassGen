@@ -11,8 +11,6 @@ namespace Converter
 {
 	public class BaseConverter
 	{
-		public List<TableSchemaResult> TableSchama { get; set; }
-
 		private string _style = string.Empty;
 
 		public string GetHighlightedHtmlCode(string code)
