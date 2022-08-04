@@ -1,9 +1,6 @@
 ﻿using Common.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleTokenizer
 {
@@ -20,8 +17,6 @@ namespace SimpleTokenizer
                     ("protected", TokenType.Keyword),
 
                     ("class", TokenType.Keyword),
-                    ("get", TokenType.Keyword),
-                    ("set", TokenType.Keyword),
                     ("this", TokenType.Keyword),
                     ("constructor", TokenType.Keyword),
 
@@ -41,8 +36,6 @@ namespace SimpleTokenizer
                 {
                     ('(', TokenType.Bracket),
                     (')', TokenType.Bracket),
-                    ('[', TokenType.Bracket),
-                    (']', TokenType.Bracket),
                     ('{', TokenType.Bracket),
                     ('}', TokenType.Bracket),
                     ('<', TokenType.Bracket),
@@ -84,7 +77,7 @@ namespace SimpleTokenizer
             {
                 return new List<(char, TokenType)>
                 {
-                    ('\0', TokenType.Nullable)
+                    ('?', TokenType.Nullable)
                 };
             }
             set { }

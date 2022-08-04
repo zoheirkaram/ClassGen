@@ -5,6 +5,7 @@ using Converter;
 using System;
 using System.Windows;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace TableToClass
 {
@@ -23,9 +24,11 @@ namespace TableToClass
 
 			this.cboObjectTypes.ItemsSource = Enum.GetValues(typeof(ClassType)).Cast<ClassType>();
 			this.cboModifiers.ItemsSource = Enum.GetValues(typeof(Modifier)).Cast<Modifier>();
+			this.cboLanguages.ItemsSource = Enum.GetValues(typeof(Language)).Cast<Language>();
 
 			this.cboObjectTypes.SelectedIndex = 0;
 			this.cboModifiers.SelectedIndex = 0;
+			this.cboLanguages.SelectedIndex = 0;
 		}
 
 		private async void Button_Connect_Click(object sender, RoutedEventArgs e)
@@ -54,27 +57,11 @@ namespace TableToClass
             {
 				if (this.cboTables.SelectedIndex > -1)
 				{
+
 					this.btnGenerateClass.IsEnabled = false;
 
-					var classOptions = new ConvertOptions
-					{
-						TableName = this.cboTables.Text,
-						Modifier = (Modifier)Enum.Parse(typeof(Modifier), this.cboModifiers.SelectedValue.ToString()),
-						ClassType = (ClassType)Enum.Parse(typeof(ClassType), this.cboObjectTypes.SelectedValue.ToString()),
-						ShowForeignKey = this.chkShowForeignKey.IsChecked ?? false,
-						ShowForeignProperty = this.chkShowForeignProperty.IsChecked ?? false,
-						ShowMaxLength = this.chkShowMaxLength.IsChecked ?? false,
-						ShowPrimaryKey = this.chkShowPrimaryKey.IsChecked ?? false,
-						ShowTableName = this.chkShowTableName.IsChecked ?? false,
-						EnumerateSimilarForeignKeyProperties = this.chkEnumerateSimilarFKProperties.IsChecked ?? false
-					};
+					await this.GenerateCode();
 
-					var converter = new TypeScriptConverter(classOptions);
-
-					var code = await converter.GetClass(context);
-					var @class = converter.GetHighlightedHtmlCode(code);
-
-					this.htmlDisplay.NavigateToString(@class);
 					this.btnGenerateClass.IsEnabled = true;
 				}
 
@@ -84,6 +71,47 @@ namespace TableToClass
 				MessageBox.Show(ex.InnerException?.Message ?? ex.Message, "Exception");
 				this.btnGenerateClass.IsEnabled = true;
 			}
+		}
+
+		private async Task GenerateCode()
+		{
+
+			var classOptions = new ConvertOptions
+			{
+				TableName = this.cboTables.Text,
+				Modifier = (Modifier)Enum.Parse(typeof(Modifier), this.cboModifiers.SelectedValue.ToString()),
+				ClassType = (ClassType)Enum.Parse(typeof(ClassType), this.cboObjectTypes.SelectedValue.ToString()),
+				ShowForeignKey = this.chkShowForeignKey.IsChecked ?? false,
+				ShowForeignProperty = this.chkShowForeignProperty.IsChecked ?? false,
+				ShowMaxLength = this.chkShowMaxLength.IsChecked ?? false,
+				ShowPrimaryKey = this.chkShowPrimaryKey.IsChecked ?? false,
+				ShowTableName = this.chkShowTableName.IsChecked ?? false,
+				EnumerateSimilarForeignKeyProperties = this.chkEnumerateSimilarFKProperties.IsChecked ?? false
+			};
+
+			var lang = (Language)Enum.Parse(typeof(Language), this.cboLanguages.SelectedValue.ToString());
+			var cSharpConverter = new CSharpConverter(classOptions);
+			var typeScriptConverter = new TypeScriptConverter(classOptions);
+
+			string code;
+			var @class = string.Empty;
+
+
+			switch (lang)
+			{
+				case Common.Enums.Language.CSharp:
+					code = await cSharpConverter.GetClass(this.context);
+					@class = cSharpConverter.GetHighlightedHtmlCode(code);
+					break;
+
+				case Common.Enums.Language.TypeScript:
+					code = await typeScriptConverter.GetClass(this.context);
+					@class = typeScriptConverter.GetHighlightedHtmlCode(code);
+					break;
+			}
+
+			this.htmlDisplay.NavigateToString(@class);
+
 		}
 	}
 }

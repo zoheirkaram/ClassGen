@@ -24,7 +24,7 @@ namespace Converter
 			this._classOptions = classOptions ?? new ConvertOptions();
 		}
 
-		public async Task<string> GetClass(IContext context)
+		public override async Task<string> GetClass(IContext context)
 		{
 			var nullableSqlTypes = new List<string> { "bigint, bit, date, datetime, datetime2, datetimeoffset, decimal, float, int, money, numeric, real, smalldatetime, smallint, smallmoney, time, tinyint, uniqueidentifier" };
 			var stringBuilder = new StringBuilder();
@@ -95,7 +95,7 @@ namespace Converter
 			return stringBuilder.ToString();
 		}
 
-		public string GetTableDefinitoinCommandString()
+		public override string GetTableDefinitoinCommandString()
 		{
 			var command = $@"DECLARE @tableName varchar(50) = '{this._classOptions.TableName}';
 

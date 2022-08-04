@@ -1,18 +1,29 @@
 ﻿using Common.Classes;
 using Common.Enums;
+using DBContext;
 using SimpleTokenizer;
+using System.Threading.Tasks;
 
 namespace Converter
 {
-	public class BaseConverter
+	public abstract class BaseConverter
 	{
 		private string _style = string.Empty;
 		private Language _language;
+
+		public BaseConverter()
+		{
+			this._language = Language.CSharp;
+		}
 
 		public BaseConverter(Language language)
 		{
 			this._language = language;
 		}
+
+		public abstract Task<string> GetClass(IContext context);
+
+		public abstract string GetTableDefinitoinCommandString();
 
 		public string GetHighlightedHtmlCode(string code)
 		{

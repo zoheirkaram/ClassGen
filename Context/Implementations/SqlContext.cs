@@ -66,8 +66,9 @@ namespace DBContext
 			while (await reader.ReadAsync())
 			{
 				var obj = Activator.CreateInstance<T>();
+				var objProps = obj.GetType().GetProperties();
 
-				foreach (var prop in obj.GetType().GetProperties())
+				foreach (var prop in objProps)
 				{
 					try
 					{

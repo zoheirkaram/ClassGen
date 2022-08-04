@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Converter
 {
@@ -23,33 +24,67 @@ namespace Converter
 			this._classOptions = classOptions ?? new ConvertOptions();
 		}
 
-		public async Task<string> GetClass(IContext context)
+		public override async Task<string> GetClass(IContext context)
 		{
 			var stringBuilder = new StringBuilder();
 
-			context.CommandString = GetTableDefinitoinCommandString();
+			context.CommandString = this.GetTableDefinitoinCommandString();
 			var tableSchama = await context.GetTableDataAsync<TableSchemaResult>();
 
 			stringBuilder.AppendLine($"class {new Pluralizer().Singularize(this._classOptions.TableName)}");
 			stringBuilder.AppendLine("{");
 
+			var constructor = new StringBuilder().Append("constructor (");
+			var constructorList = new List<string>();
+
 			tableSchama.ToList()
 			.ForEach(td =>
 			{
 				stringBuilder.AppendLine($"\t{this._classOptions.Modifier.ToString().ToLower()} {td.ColumnName}: {td.cSharpType};");
+				constructorList.Add($"_{td.ColumnName}{(td.IsNullable ? "?" : "")}: {td.cSharpType}");
 			});
 
+
+
+			stringBuilder.AppendLine("");
+			stringBuilder.AppendLine($"\tconstructor ({string.Join(", ", constructorList.ToArray())})");
+
+			tableSchama.ToList()
+			.ForEach(td =>
+			{
+				stringBuilder.AppendLine($"\t\tthis.{td.ColumnName} = _{td.ColumnName};");
+			});
+
+			stringBuilder.AppendLine("\t}");
 			stringBuilder.AppendLine("}");
 
 			return stringBuilder.ToString();
 		}
 
-		public string GetTableDefinitoinCommandString()
+		public override string GetTableDefinitoinCommandString()
 		{
 			var command = $@"DECLARE @tableName varchar(50) = '{this._classOptions.TableName}';
 
 							SELECT c.name AS ColumnName
 								 , stp.name AS TypeName
+								 , CASE
+									   WHEN stp.name IN
+									   (   'nvarchar'
+										 , 'nchar'
+									   ) THEN c.max_length / 2
+									   ELSE c.max_length
+								   END AS MaxLength
+								 , i.is_primary_key AS IsPrimaryKey
+								 , Cast(CASE
+											WHEN fkc.parent_column_id IS NULL THEN 0
+											ELSE 1
+										END AS bit) AS HasReference
+								 , c.is_nullable AS IsNullable
+								 , t2.name AS ReferencedTableName
+								 , Cast(CASE
+											WHEN t2.name IS NOT NULL THEN Row_Number() OVER (PARTITION BY t2.name ORDER BY c.column_id)
+											ELSE NULL
+										END AS int) AS ReferencedTableNumber
 								 , CASE stp.name
 									   WHEN 'bigint' THEN 'number'
 									   WHEN 'binary' THEN 'any'
