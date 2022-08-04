@@ -20,11 +20,6 @@ namespace SimpleTokenizer
                     ("class", TokenType.Keyword),
                     ("this", TokenType.Keyword),
                     ("constructor", TokenType.Keyword),
-
-                    ("boolean", TokenType.Keyword),
-                    ("string", TokenType.Keyword),
-                    ("number", TokenType.Keyword),
-                    ("Date", TokenType.Keyword),
                 };
             }
             set { }
@@ -83,6 +78,19 @@ namespace SimpleTokenizer
             }
             set { }
         }
-
+        public override List<(string, TokenType)> Types
+        {
+            get
+            {
+                return new List<(string, TokenType)>
+                {
+                    ("boolean", TokenType.Type),
+                    ("string", TokenType.Type),
+                    ("number", TokenType.Type),
+                    ("Date", TokenType.Type),
+                };
+            }
+            set { }
+        }
     }
 }

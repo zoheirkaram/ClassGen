@@ -13,6 +13,7 @@ namespace SimpleTokenizer
 		void PrepareHtmlTokens(List<Token> tokens);
 
 		List<(string, TokenType)> Keywords { get; set; }
+		List<(string, TokenType)> Types { get; set; }
 		List<(char, TokenType)> Brackets { get; set; }
 		List<(char, TokenType)> Separators { get; set; }
 		List<(char, TokenType)> Quotations { get; set; }

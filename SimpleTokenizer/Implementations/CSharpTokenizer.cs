@@ -25,27 +25,7 @@ namespace SimpleTokenizer
                     ("get", TokenType.Keyword),
                     ("set", TokenType.Keyword),
                     ("const", TokenType.Keyword),
-                    ("null", TokenType.Keyword),
-
-                    ("bool", TokenType.Keyword),
-                    ("byte", TokenType.Keyword),
-                    ("char", TokenType.Keyword),
-                    ("decimal", TokenType.Keyword),
-                    ("double", TokenType.Keyword),
-                    ("extern", TokenType.Keyword),
-                    ("float", TokenType.Keyword),
-                    ("int", TokenType.Keyword),
-                    ("long", TokenType.Keyword),
-                    ("object", TokenType.Keyword),
-                    ("readonly", TokenType.Keyword),
-                    ("sbyte", TokenType.Keyword),
-                    ("short", TokenType.Keyword),
-                    ("string", TokenType.Keyword),
-                    ("TimeSpan", TokenType.Keyword),
-                    ("DateTime", TokenType.Keyword),
-                    ("DateTimeOffset", TokenType.Keyword),
-                    ("Guid", TokenType.Keyword),
-
+                    ("null", TokenType.Keyword)
                 };
             }
             set { }
@@ -106,5 +86,34 @@ namespace SimpleTokenizer
             }
             set { }
         }
+
+        public override List<(string, TokenType)> Types
+		{
+			get
+			{
+                return new List<(string, TokenType)>
+                {
+                    ("bool", TokenType.Type),
+                    ("byte", TokenType.Type),
+                    ("char", TokenType.Type),
+                    ("decimal", TokenType.Type),
+                    ("double", TokenType.Type),
+                    ("extern", TokenType.Type),
+                    ("float", TokenType.Type),
+                    ("int", TokenType.Type),
+                    ("long", TokenType.Type),
+                    ("object", TokenType.Type),
+                    ("readonly", TokenType.Type),
+                    ("sbyte", TokenType.Type),
+                    ("short", TokenType.Type),
+                    ("string", TokenType.Type),
+                    ("TimeSpan", TokenType.Type),
+                    ("DateTime", TokenType.Type),
+                    ("DateTimeOffset", TokenType.Type),
+                    ("Guid", TokenType.Type),
+                };
+			}
+            set { }
+		}
     }
 }

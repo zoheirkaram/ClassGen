@@ -56,17 +56,16 @@ namespace Converter
 
 		private void SetStyle()
 		{
-			_style = $@"
-						body {{ background-color: #{HighlightColor.Background};}}
-						.highlight {{ color: #333; font-size: 12px; line-height: 16px; }}
-						.highlight .Identifier {{ color: #{HighlightColor.Identifier}; }}
-						.highlight .Keyword {{ color: #{HighlightColor.Keyword}; }}
-						.highlight .Comment {{ color: #{HighlightColor.Comment}; }}
-						.highlight .QuotedString {{ color: #{HighlightColor.QuotedString}; }}
-						.highlight .Constant {{ color: #{HighlightColor.Constant}; }}
-						.highlight .Number {{ color: #{HighlightColor.Number}; }}
-						.highlight .Bracket {{ color: #{HighlightColor.Identifier}; }}
-					";
+			_style = $"body {{ background-color: #{HighlightColor.Background};}}" +
+					 $".highlight {{ color: #333; font-size: 12px; line-height: 16px; }}" +
+					 $".highlight .Identifier {{ color: #{HighlightColor.Identifier}; }}" +
+					 $".highlight .Keyword {{ color: #{HighlightColor.Keyword}; }}" +
+					 $".highlight .Comment {{ color: #{HighlightColor.Comment}; }}" +
+					 $".highlight .QuotedString {{ color: #{HighlightColor.QuotedString}; }}" +
+					 $".highlight .Constant {{ color: #{HighlightColor.Constant}; }}" +
+					 $".highlight .Number {{ color: #{HighlightColor.Number}; }}" +
+					 $".highlight .Bracket {{ color: #{HighlightColor.Identifier}; }}" +
+					 $".highlight .Type {{color: #{HighlightColor.Type};}}";
 		}
 	}
 }

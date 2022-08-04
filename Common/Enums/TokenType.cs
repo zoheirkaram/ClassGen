@@ -4,6 +4,7 @@
     {
 		Keyword,
 		Identifier,
+		Type,
 		Bracket,
 		Quotation,
 		Separator,

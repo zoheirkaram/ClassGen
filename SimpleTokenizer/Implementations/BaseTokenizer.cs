@@ -11,6 +11,7 @@ namespace SimpleTokenizer
 	public class BaseTokenizer : ITokenizer, IDisposable
 	{
 		public virtual List<(string, TokenType)> Keywords { get; set; }
+		public virtual List<(string, TokenType)> Types { get; set; }
 		public virtual List<(char, TokenType)> Brackets { get; set; }
 		public virtual List<(char, TokenType)> Separators { get; set; }
 		public virtual List<(char, TokenType)> Quotations { get; set; }
@@ -153,6 +154,13 @@ namespace SimpleTokenizer
                         symbolStart = i + 1;
                         symbol = string.Empty;
                     }
+                    else if (this.Types.Any(k => k.Item1 == symbol))
+					{
+                        tokens.Add(new Token { Type = TokenType.Type, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
+
+                        symbolStart = i + 1;
+                        symbol = string.Empty;
+                    }
                     else
                     {
                         tokens.Add(new Token { Type = Util.IsNumeric(symbol) ? TokenType.Number : TokenType.Identifier, LineNumber = lineNumber, PositionStart = symbolStart, SymbolLength = symbol.Length, Symbol = symbol });
@@ -173,7 +181,7 @@ namespace SimpleTokenizer
             tokens
             .ForEach(t =>
             {
-                if (t.Type == TokenType.Keyword || t.Type == TokenType.Identifier || t.Type == TokenType.QuotedString || t.Type == TokenType.Number)
+                if (t.Type == TokenType.Keyword || t.Type == TokenType.Identifier || t.Type == TokenType.QuotedString || t.Type == TokenType.Number || t.Type == TokenType.Type)
                 {
                     t.HtmlSymbol = $"<span class=\"{t.Type}\">{t.Symbol}</span>";
                 }
