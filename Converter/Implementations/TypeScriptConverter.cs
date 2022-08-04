@@ -40,8 +40,8 @@ namespace Converter
 			tableSchama.ToList()
 			.ForEach(td =>
 			{
-				stringBuilder.AppendLine($"\t{this._classOptions.Modifier.ToString().ToLower()} {td.ColumnName}: {td.cSharpType};");
-				constructorList.Add($"_{td.ColumnName}{(td.IsNullable ? "?" : "")}: {td.cSharpType}");
+				stringBuilder.AppendLine($"\t{this._classOptions.Modifier.ToString().ToLower()} {td.ColumnName}: {td.ConvertedType};");
+				constructorList.Add($"_{td.ColumnName}{(td.IsNullable ? "?" : "")}: {td.ConvertedType}");
 			});
 
 
@@ -115,7 +115,7 @@ namespace Converter
 									   WHEN 'varbinary' THEN 'Array<number>'
 									   WHEN 'varchar' THEN 'string'
 									   ELSE 'UNKNOWN_' + stp.name
-								   END AS cSharpType
+								   END AS ConvertedType
 							FROM sys.columns c
 								 INNER JOIN sys.tables t ON t.object_id = c.object_id
 								 INNER JOIN sys.types stp ON stp.system_type_id = c.system_type_id

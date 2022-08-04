@@ -10,6 +10,6 @@
 		public bool IsNullable { get; set; }
 		public string ReferencedTableName { get; set; }
 		public int ReferencedTableNumber { get; set; }
-		public string cSharpType { get; set; }
+		public string ConvertedType { get; set; }
 	}
 }

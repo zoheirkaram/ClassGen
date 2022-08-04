@@ -64,7 +64,7 @@ namespace Converter
 						stringBuilder.AppendLine("\t[Key]");
 					}
 
-					if (td.cSharpType.Equals("string", StringComparison.OrdinalIgnoreCase) && this._classOptions.ShowMaxLength)
+					if (td.ConvertedType.Equals("string", StringComparison.OrdinalIgnoreCase) && this._classOptions.ShowMaxLength)
 					{
 						if (td.MaxLength > 0)
 						{
@@ -73,7 +73,7 @@ namespace Converter
 					}
 				}
 
-				stringBuilder.AppendLine($"\tpublic {td.cSharpType}{(td.IsNullable && nullableSqlTypes.Where(st => st == td.TypeName) != null && !"string,byte[]".Contains(td.cSharpType) ? "?" : "")} {td.ColumnName} {{ get; set; }}");
+				stringBuilder.AppendLine($"\tpublic {td.ConvertedType}{(td.IsNullable && nullableSqlTypes.Where(st => st == td.TypeName) != null && !"string,byte[]".Contains(td.ConvertedType) ? "?" : "")} {td.ColumnName} {{ get; set; }}");
 
 				if (this._classOptions.ShowForeignProperty)
 				{
@@ -149,7 +149,7 @@ namespace Converter
 									   WHEN 'varbinary' THEN 'byte[]'
 									   WHEN 'varchar' THEN 'string'
 									   ELSE 'UNKNOWN_' + stp.name
-								   END AS cSharpType
+								   END AS ConvertedType
 							FROM sys.columns c
 								 INNER JOIN sys.tables t ON t.object_id = c.object_id
 								 INNER JOIN sys.types stp ON stp.system_type_id = c.system_type_id
