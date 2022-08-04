@@ -8,12 +8,11 @@ Simple application to convert a selected database table to class
 
 #### Dependencies
 - @rvegajr - https://github.com/rvegajr/Pluralize.NET.Core For pluralization/singularazation used when generating class.
-- I removed the highlighting dependency and created a simple tokenizer to be used as class highlighter.
 
 #### Plans
 - Adding connection manager
 - Highlight theme manager
-- Adding multiple language support
+- Conversion to multiple languages
 
 ### Screenshot
 
