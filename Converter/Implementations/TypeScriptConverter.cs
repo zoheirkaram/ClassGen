@@ -31,7 +31,7 @@ namespace Converter
 			context.CommandString = this.GetTableDefinitoinCommandString();
 			var tableSchama = await context.GetTableDataAsync<TableSchemaResult>();
 
-			stringBuilder.AppendLine($"class {new Pluralizer().Singularize(this._classOptions.TableName)}");
+			stringBuilder.AppendLine($"export class {new Pluralizer().Singularize(this._classOptions.TableName)}");
 			stringBuilder.AppendLine("{");
 
 			var constructor = new StringBuilder().Append("constructor (");

@@ -8,14 +8,14 @@
 		Width="1037"
 		Background="#FF404040" Loaded="OnLoad"
 		ResizeMode="NoResize">
-	<Grid Margin="10">
+	<Grid Margin="5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="25"></RowDefinition>
 			<RowDefinition Height="25"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="200"/>
+			<ColumnDefinition Width="220"/>
 			<ColumnDefinition Width="120"/>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
@@ -36,18 +36,18 @@
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="30"></RowDefinition>
 			</Grid.RowDefinitions>
-			<Label x:Name="lblLanguage" Content="Language" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Bahnschrift SemiLight"/>
-			<ComboBox x:Name="cboLanguages" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="180"/>
-			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Bahnschrift SemiLight"/>
-			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="180"/>
-			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Bahnschrift SemiLight"/>
-			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="180"/>
-			<CheckBox x:Name="chkShowTableName" Content="Show Table Name" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Bahnschrift SemiLight"/>
-			<CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Bahnschrift SemiLight"/>
-			<CheckBox x:Name="chkShowForeignKey" Content="Show Foreign Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="8" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Bahnschrift SemiLight"/>
-			<CheckBox x:Name="chkShowForeignProperty" Content="Show Foreign Property" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="9" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Bahnschrift SemiLight"/>
-			<CheckBox x:Name="chkShowMaxLength" Content="Show Max Length" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="10" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Bahnschrift SemiLight"/>
-			<CheckBox x:Name="chkEnumerateSimilarFKProperties" Content="Enumerate Similar FK Properties" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="11" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="False" FontFamily="Bahnschrift SemiLight"/>
+			<Label x:Name="lblLanguage" Content="Language" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" HorizontalContentAlignment="Left" Padding="0,5,5,5"/>
+			<ComboBox x:Name="cboLanguages" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
+			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" Padding="0,5,5,5"/>
+			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
+			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" Padding="0,5,5,5"/>
+			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
+			<CheckBox x:Name="chkShowTableName" Content="Show Table Name" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
+			<CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
+			<CheckBox x:Name="chkShowForeignKey" Content="Show Foreign Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="8" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
+			<CheckBox x:Name="chkShowForeignProperty" Content="Show Foreign Property" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="9" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
+			<CheckBox x:Name="chkShowMaxLength" Content="Show Max Length" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="10" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
+			<CheckBox x:Name="chkEnumerateSimilarFKProperties" Content="Enumerate Similar FK Properties" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="11" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="False" FontFamily="Corbel"/>
 			<Button Grid.Row="13" Click="Button_GenerateClass_Click" Height="30" VerticalAlignment="Center" x:Name="btnGenerateClass">
 				<Button.Resources>
 					<Style TargetType="Border">
@@ -57,10 +57,10 @@
 				Generate Class
 			</Button>
 		</Grid>
-		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="auto" Foreground="Gainsboro" Margin="5,0,0,0" Grid.Column="1" FontFamily="Bahnschrift SemiLight"/>
-		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="auto" Foreground="Gainsboro" Margin="5,0,0,0" Grid.Column="1" FontFamily="Bahnschrift SemiLight"/>
-		<TextBox x:Name="txtConnection" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=.;Initial Catalog=db_Minerva;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="545" Height="20"/>
-		<Button x:Name="btnConnect" Content="Connect" Grid.Column="2" HorizontalAlignment="Left" Margin="560,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20" Background="#FFDDDDDD">
+		<Label x:Name="lblConnectionString" Content="Connection String" HorizontalAlignment="Left" VerticalAlignment="Center" Width="auto" Foreground="Gainsboro" Margin="5,0,0,0" Grid.Column="1" FontFamily="Corbel"/>
+		<Label x:Name="lblTables" Content="Tables" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="auto" Foreground="Gainsboro" Margin="5,0,0,0" Grid.Column="1" FontFamily="Corbel"/>
+		<TextBox x:Name="txtConnection" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Text="Data Source=.;Initial Catalog=AdventureWorks2017;Integrated Security=SSPI" TextWrapping="Wrap" VerticalAlignment="Center" Width="545" Height="20"/>
+		<Button x:Name="btnConnect" Content="Connect" Grid.Column="2" HorizontalAlignment="Left" Margin="560,0,0,0" VerticalAlignment="Center" Width="90" Click="Button_Connect_Click" Height="20" Background="#FFDDDDDD" FontFamily="Corbel">
 			<Button.Resources>
 				<Style TargetType="Border">
 					<Setter Property="CornerRadius" Value="3"/>

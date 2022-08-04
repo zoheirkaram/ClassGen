@@ -16,6 +16,7 @@ namespace SimpleTokenizer
                     ("private", TokenType.Keyword),
                     ("protected", TokenType.Keyword),
 
+                    ("export", TokenType.Keyword),
                     ("class", TokenType.Keyword),
                     ("this", TokenType.Keyword),
                     ("constructor", TokenType.Keyword),
