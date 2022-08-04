@@ -4,8 +4,7 @@
 Simple application to convert a selected database table to class
 
 - Support Sql Server as database source
-- Convert to C# class
-- New data sources and language support to be added
+- Convert to C# and TypeScript class. More languages to come
 
 #### Dependencies
 - @rvegajr - https://github.com/rvegajr/Pluralize.NET.Core For pluralization/singularazation used when generating class.
