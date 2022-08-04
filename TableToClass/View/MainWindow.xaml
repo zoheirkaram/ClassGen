@@ -38,10 +38,10 @@
 			</Grid.RowDefinitions>
 			<Label x:Name="lblLanguage" Content="Language" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" HorizontalContentAlignment="Left" Padding="0,5,5,5"/>
 			<ComboBox x:Name="cboLanguages" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
-			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" Padding="0,5,5,5"/>
-			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
-			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" Padding="0,5,5,5"/>
-			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
+			<Label x:Name="lblModifiers" Content="Modifier" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" Padding="0,5,5,5"/>
+			<ComboBox x:Name="cboModifiers" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
+			<Label x:Name="lblObjectTypes" Content="Object Type" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Width="auto" Margin="10,0,0,0" Foreground="Gainsboro" FontFamily="Corbel" Padding="0,5,5,5"/>
+			<ComboBox x:Name="cboObjectTypes" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center" Width="180" Margin="10,0,0,0"/>
 			<CheckBox x:Name="chkShowTableName" Content="Show Table Name" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
 			<CheckBox x:Name="chkShowPrimaryKey" Content="Show Primary Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
 			<CheckBox x:Name="chkShowForeignKey" Content="Show Foreign Key" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="8" VerticalAlignment="Center" Foreground="Gainsboro" IsChecked="True" FontFamily="Corbel"/>
@@ -67,7 +67,13 @@
 				</Style>
 			</Button.Resources>
 		</Button>
-		<ComboBox x:Name="cboTables" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="324"/>
+		<Grid Grid.Row="1" Grid.Column="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="340"></ColumnDefinition>
+				<ColumnDefinition Width="50"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<ComboBox x:Name="cboTables" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="324"/>
+		</Grid>
 		<WebBrowser Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="htmlDisplay" Margin="5,5,5,5" OpacityMask="#FF1E1E1E"/>
 		<Label x:Name="label" Content="ClassGen" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="36" FontWeight="Bold" FontStyle="Normal" FontFamily="Bahnschrift SemiLight"/>
 	</Grid>
