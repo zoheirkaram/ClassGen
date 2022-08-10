@@ -36,7 +36,7 @@ namespace SimpleTokenizer
 
             while (lineNumber <= codeLines.Length)
             {
-                var lineTokens = this.TokenizLine(codeLines[lineNumber - 1], lineNumber);
+                var lineTokens = this.TokenizeLine(codeLines[lineNumber - 1], lineNumber);
 
                 codeTokens.AddRange(lineTokens);
 
@@ -48,7 +48,7 @@ namespace SimpleTokenizer
             return codeTokens;
         }
 
-        public virtual List<Token> TokenizLine(string line, int lineNumber)
+        public virtual List<Token> TokenizeLine(string line, int lineNumber)
         {
             var tokens = new List<Token>();
 
