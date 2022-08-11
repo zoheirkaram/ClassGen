@@ -7,7 +7,7 @@ namespace SimpleTokenizer
 	public interface ITokenizer
 	{
 		List<Token> GetTokens(string code);
-		List<Token> TokenizLine(string line, int lineNumber);
+		List<Token> TokenizeLine(string line, int lineNumber);
 		char CurrentChar(string line, int location);
 		char NextChar(string line, int location);
 		void PrepareHtmlTokens(List<Token> tokens);
