@@ -13,7 +13,7 @@ namespace SimpleTokenizer
 		public virtual List<(string, TokenType)> Keywords { get; set; }
 		public virtual List<(string, TokenType)> Types { get; set; }
 		public virtual List<(char, TokenType)> Brackets { get; set; }
-		public virtual List<(char, TokenType)> Separators { get; set; }
+		public virtual List<(char, TokenType)> Punctuator { get; set; }
 		public virtual List<(char, TokenType)> Quotations { get; set; }
 		public virtual List<(char, TokenType)> Nullable { get; set; }
 
@@ -97,7 +97,7 @@ namespace SimpleTokenizer
                     continue;
                 }
 
-                if (this.Separators.Any(b => b.Item1 == this.CurrentChar(line, i)))
+                if (this.Punctuator.Any(b => b.Item1 == this.CurrentChar(line, i)))
                 {
                     tokens.Add(new Token { Type = TokenType.Separator, LineNumber = lineNumber, PositionStart = i, SymbolLength = 1, Symbol = this.CurrentChar(line, i).ToString() });
 
@@ -137,7 +137,7 @@ namespace SimpleTokenizer
                 if (
                         this.Quotations.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
-                        this.Separators.Any(b => b.Item1 == this.NextChar(line, i))
+                        this.Punctuator.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
                         this.Brackets.Any(b => b.Item1 == this.NextChar(line, i))
                         ||
@@ -234,7 +234,7 @@ namespace SimpleTokenizer
             {
                 this.Keywords = null;
                 this.Brackets = null;
-                this.Separators = null;
+                this.Punctuator = null;
                 this.Quotations = null;
                 this.Nullable = null;
             }

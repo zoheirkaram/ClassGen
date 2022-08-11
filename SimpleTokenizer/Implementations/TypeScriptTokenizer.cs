@@ -40,7 +40,7 @@ namespace SimpleTokenizer
             }
             set { }
         }
-        public override List<(char, TokenType)> Separators
+        public override List<(char, TokenType)> Punctuator
         {
             get
             {

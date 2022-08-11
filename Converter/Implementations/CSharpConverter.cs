@@ -26,6 +26,7 @@ namespace Converter
 
 		public override async Task<string> GetClass(IContext context)
 		{
+			var colCharToRemove = new List<char>() { '#', ' ', ':', '?', '!', '@', '$', '%', '&', '*', '(', ')', '[', ']', '{', '}' };
 			var nullableSqlTypes = new List<string> { "bigint, bit, date, datetime, datetime2, datetimeoffset, decimal, float, int, money, numeric, real, smalldatetime, smallint, smallmoney, time, tinyint, uniqueidentifier" };
 			var stringBuilder = new StringBuilder();
 
@@ -57,6 +58,8 @@ namespace Converter
 			tableSchama.ToList()
 			.ForEach(td =>
 			{
+				var isInvalidColName = false;
+
 				if (this._classOptions.ClassType == ClassType.Entity)
 				{
 					if (td.IsPrimaryKey && this._classOptions.ShowPrimaryKey)
@@ -73,7 +76,21 @@ namespace Converter
 					}
 				}
 
-				stringBuilder.AppendLine($"\tpublic {td.ConvertedType}{(td.IsNullable && nullableSqlTypes.Where(st => st == td.TypeName) != null && !"string,byte[]".Contains(td.ConvertedType) ? "?" : "")} {td.ColumnName} {{ get; set; }}");
+				if (td.ColumnName.Any(cn => colCharToRemove.Contains(cn)))
+				{
+					isInvalidColName = true;
+					if (this._classOptions.ClassType == ClassType.Entity)
+					{
+						stringBuilder.AppendLine($"\t[Column(\"{td.ColumnName}\")]");
+					}
+
+					if (this._classOptions.ClassType == ClassType.Contract)
+					{
+						stringBuilder.AppendLine($"\t[JsonProperty(PropertyName =\"{td.ColumnName}\")]");
+					}
+				}
+
+				stringBuilder.AppendLine($"\tpublic {td.ConvertedType}{(td.IsNullable && nullableSqlTypes.Where(st => st == td.TypeName) != null && !"string,byte[]".Contains(td.ConvertedType) ? "?" : "")} {(isInvalidColName ? string.Join("_", td.ColumnName.Split(colCharToRemove.ToArray())) : td.ColumnName)} {{ get; set; }}");
 
 				if (this._classOptions.ShowForeignProperty)
 				{
@@ -88,6 +105,8 @@ namespace Converter
 						stringBuilder.AppendLine($"\tpublic virtual {referenceClass} {(this._classOptions.EnumerateSimilarForeignKeyProperties ? $"{referenceClass}_{td.ReferencedTableNumber}" : $"{td.ColumnName}_{referenceClass}")} {{ get; set; }}");
 					}
 				}
+
+				isInvalidColName = false;
 			});
 
 			stringBuilder.AppendLine("}");

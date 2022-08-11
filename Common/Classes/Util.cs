@@ -15,7 +15,7 @@ namespace Common.Classes
 
 		public static string DefaultScreen()
 {
-			return $"<style>body{{background-color: #{HighlightColor.Background};}}</style>" +
+			return $"<style>body{{background-color: {HighlightColor.Background};}}</style>" +
 				   $"<body><div class=\"highlight\"><pre>" +
 				   $"</pre></div></body>";
 		}
