@@ -16,6 +16,6 @@ Simple application to convert a selected database table to class
 
 ### Screenshot
 
-![image](https://user-images.githubusercontent.com/12003810/182928795-fce00a2f-3558-4084-9c28-bb26ce8bcf53.png)
+![image](https://user-images.githubusercontent.com/12003810/186821538-59fe4dd7-bd60-44b2-93cd-3cc42c455998.png)
 ![image](https://user-images.githubusercontent.com/12003810/182928866-e49d5dfc-bec6-4918-976a-59d7e8e96f76.png)
 
