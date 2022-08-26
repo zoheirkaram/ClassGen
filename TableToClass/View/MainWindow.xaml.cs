@@ -6,12 +6,15 @@ using System;
 using System.Windows;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TableToClass
 {
 	public partial class MainWindow : Window
 	{
 		public SqlContext context;
+		public string AppFolder;
+		public string AppFile;
 
 		public MainWindow()
 		{
@@ -29,6 +32,8 @@ namespace TableToClass
 			this.cboObjectTypes.SelectedIndex = 0;
 			this.cboModifiers.SelectedIndex = 0;
 			this.cboLanguages.SelectedIndex = 0;
+
+			this.CreateAppFile();
 		}
 
 		private async void Button_Connect_Click(object sender, RoutedEventArgs e)
@@ -111,6 +116,36 @@ namespace TableToClass
 			}
 
 			this.htmlDisplay.NavigateToString(@class);
+
+		}
+
+		private void CreateAppFile()
+		{
+			try
+			{
+				var appFolder = "ClassGen";
+				var appFile = "connections.dat";
+				var userRoamingFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+				var fileFolder = new Uri($"{userRoamingFolder}/{appFolder}").PathAndQuery;
+				
+				this.AppFolder = fileFolder;
+
+				if (!Directory.Exists(fileFolder))
+				{
+					Directory.CreateDirectory(fileFolder);
+				}
+
+				if (!File.Exists($"{fileFolder}/{appFile}"))
+				{
+					File.Create($"{fileFolder}/{appFile}");
+					
+				}
+				
+			}
+			catch (Exception)
+			{
+
+			}
 
 		}
 	}

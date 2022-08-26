@@ -36,11 +36,7 @@ namespace Converter
 			if (this._classOptions.ClassType == ClassType.Entity)
 			{
 				stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations;");
-
-				if (tableSchama.Any(td => td.HasReference))
-				{
-					stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
-				}
+				stringBuilder.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");				
 
 				stringBuilder.AppendLine("");
 				stringBuilder.AppendLine("-----");
@@ -71,7 +67,7 @@ namespace Converter
 					{
 						if (td.MaxLength > 0)
 						{
-							_ = stringBuilder.AppendLine($"\t[MaxLength(\"{td.MaxLength}\")]");
+							_ = stringBuilder.AppendLine($"\t[MaxLength({td.MaxLength})]");
 						}
 					}
 				}
